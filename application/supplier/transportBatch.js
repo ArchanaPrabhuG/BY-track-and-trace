@@ -53,7 +53,7 @@ async function main () {
         const network = await gateway.getNetwork('nckchannel');
         const contract = await network.getContract('nckcc');
         const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','voeltoty');
-		console.log('in transferBatch.js');
+
     } catch (error) {
 
         console.log(`Error processing transaction. ${error}`);
