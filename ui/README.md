@@ -1,4 +1,4 @@
-# 
+#
 
 A Quasar Framework app
 

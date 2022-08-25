@@ -17,22 +17,13 @@ SPDX-License-Identifier: Apache-2.0
 // Bring key classes into scope, most importantly Fabric SDK network class
 const fs = require('fs');
 const yaml = require('js-yaml');
-const cors = require('cors');
+
 const { FileSystemWallet, Gateway } = require('fabric-network');
 
 // A wallet stores a collection of identities for use
 const wallet = new FileSystemWallet('../identity/user/adam/wallet');
 
-app.use(cors());
 
-var corsOptions = {
-  origin: '192.168.100.100',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
-app.listen(8090, function () {
-  console.log('CORS-enabled web server listening on port 8090')
-})
 
 // Main program function
 async function main () {

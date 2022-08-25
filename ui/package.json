@@ -1,11 +1,11 @@
 {
   "name": "ui",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "blockNCK",
+  "description": "BY Supply chain Track and Trace app",
+  "productName": "BY",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
-  "author": "Kasun Vithanage <alankasun@gmail.com>",
+  "author": "Archana Prabhu <garchanaprabhu@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
