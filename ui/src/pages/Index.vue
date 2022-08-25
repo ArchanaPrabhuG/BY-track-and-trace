@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/BY.png">
+    <img alt="Architectural Diagram" src="~assets/BY.png">
   </q-page>
 </template>
 

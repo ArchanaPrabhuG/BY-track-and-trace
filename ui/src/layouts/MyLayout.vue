@@ -15,7 +15,7 @@
 
         <q-toolbar-title>
           <q-avatar>
-          </q-avatar> BY-SupplyChain
+          </q-avatar>Track and Trace
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -78,7 +78,7 @@ const menuList = [
     icon: 'fas fa-truck',
     label: 'Transfer',
     separator: true,
-    to: '/transportbatch'
+    to: '/transportBatch'
   },
   {
     icon: 'fas fa-clipboard-check',
