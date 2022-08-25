@@ -1,4 +1,4 @@
-# blockNCK (ui)
+# 
 
 A Quasar Framework app
 
