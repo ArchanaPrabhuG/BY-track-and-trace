@@ -23,7 +23,7 @@ app.use(express.static('../public'));
 app.use(cors());
 
 var corsOptions = {
-  origin: '192.168.100.100',
+  origin: '192.168.100.100:8080',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
