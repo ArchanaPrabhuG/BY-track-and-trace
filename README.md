@@ -59,10 +59,10 @@ cd fabric-samples
 git clone https://github.com/ArchanaPrabhuG/BY-track-and-trace.git
 
 
-chmod -R 777 by-track-and-trace
-cd blockchain-based-IoT-platform-implementation
+chmod -R 777 BY-track-and-trace
+cd BY-track-and-trace
 
-./ncksetup.sh
+./byfnsetup.sh
 
 
 
@@ -97,6 +97,13 @@ npm install --save cors
 node addToWallet.js
 node createBatch.js
 npm start
+
+On further logins
+vagrant up
+./down.sh delete the 3 folders
+./byfnsetup.sh
+npm start relevant folder within application
+quasar dev on ui folder
 
 Update server.js as in  https://jda365-my.sharepoint.com/:u:/g/personal/archana_prabhu_jda_com/ES7sQlXx4EhJpLyAaPX0FZUBdTL3S9Dailt8cugOirgMUQ?e=bl1gMt
 -------------------------------------------------------------------------------------------------------------------------------------------
