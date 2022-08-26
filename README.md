@@ -59,18 +59,11 @@ cd fabric-samples
 git clone https://github.com/ArchanaPrabhuG/BY-track-and-trace.git
 
 
-chmod -R 777 by-track-and-trace
-cd blockchain-based-IoT-platform-implementation
+chmod -R 777 BY-track-and-trace
+cd BY-track-and-trace
 
-./ncksetup.sh
+./byfsnsetup.sh
 
-
-
-Smartcontract ::
-cd smartcontracts
-sudo apt-get install npm
-nvm install 8.17.0
-npm install
 
 UI ::
 
@@ -81,6 +74,14 @@ sudo npm install -g  @quasar/cli
 npm rebuild node-sass
 source ~/.bashrc
 quasar dev
+
+
+Smartcontract ::
+cd smartcontracts
+sudo apt-get install npm
+nvm install 8.17.0
+npm install
+
 
 
 
@@ -98,7 +99,7 @@ node addToWallet.js
 node createBatch.js
 npm start
 
-Update server.js as in  https://jda365-my.sharepoint.com/:u:/g/personal/archana_prabhu_jda_com/ES7sQlXx4EhJpLyAaPX0FZUBdTL3S9Dailt8cugOirgMUQ?e=bl1gMt
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -110,7 +111,7 @@ Below Instructions are for issues only
 
 Bring down the network
 1)./down.sh
-cd by-network
+cd nck-network
 rm -rf channel-artifacts
 rm -rf crypto-configs
 rm -rf scripts
@@ -137,21 +138,3 @@ docker rm -f $(docker ps -a -q)
 
 
 npm install -g node-inspector
-
-
-
-
-References:
-https://www.coding-bootcamps.com/ultimate-guide-for-building-a-blockchain-supply-chain-using-hyperledger-fabric-and-composer.html
-https://github.com/alentar/blockchain-based-IoT-platform-implementation/blob/master/README.md
-https://github.com/saicharanpogul/supply-chain-management-using-hyperledger-fabric
-https://hyperledger-fabric.readthedocs.io/en/v2.2.0/install.html
-https://rapchan.gitbook.io/hyperledger-food-supply-chain/implementation
-https://github.com/ialberquilla/hlf1.4-supply-chain
-https://www.codegrepper.com/code-examples/javascript/express+cors+not+working
-https://github.com/blockNCK/nck/tree/master/by-network
-
-
-git remote add origin https://github.com/ArchanaPrabhuG/BY-track-and-trace.git
-
-https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
