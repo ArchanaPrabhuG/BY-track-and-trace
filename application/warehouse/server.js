@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express')
-const cors = require('cors');
 const app = express()
 const port = 3001
 var bodyParser = require('body-parser');
@@ -20,15 +19,6 @@ const { FileSystemWallet, Gateway } = require('fabric-network');
 const wallet = new FileSystemWallet('../identity/user/nick/wallet');
 
 app.use(express.static('../public'));
-app.use(cors());
-
-var corsOptions = {
-  origin: '192.168.100.100',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-app.listen(8091, function () {
-  console.log('CORS-enabled web server listening on port 8091')
-})
 app.post('/api/addbatch', async (req, res) => {
     // A gateway defines the peers used to access Fabric networks
     const gateway = new Gateway();
