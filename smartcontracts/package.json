@@ -1,7 +1,7 @@
 {
-    "name": "ncksmartcontract",
+    "name": "bysmartcontract",
     "version": "1.0.0",
-    "description": "smart contracts of nck chaincode",
+    "description": "smart contracts of by chaincode",
     "main": "index.js",
     "engines": {
         "node": ">=8",

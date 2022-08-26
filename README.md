@@ -110,7 +110,7 @@ Below Instructions are for issues only
 
 Bring down the network
 1)./down.sh
-cd nck-network
+cd by-network
 rm -rf channel-artifacts
 rm -rf crypto-configs
 rm -rf scripts
@@ -149,7 +149,7 @@ https://hyperledger-fabric.readthedocs.io/en/v2.2.0/install.html
 https://rapchan.gitbook.io/hyperledger-food-supply-chain/implementation
 https://github.com/ialberquilla/hlf1.4-supply-chain
 https://www.codegrepper.com/code-examples/javascript/express+cors+not+working
-https://github.com/blockNCK/nck/tree/master/nck-network
+https://github.com/blockNCK/nck/tree/master/by-network
 
 
 git remote add origin https://github.com/ArchanaPrabhuG/BY-track-and-trace.git

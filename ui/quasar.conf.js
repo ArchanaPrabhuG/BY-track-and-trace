@@ -110,9 +110,7 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'blockNCK',
-        // short_name: 'blockNCK',
-        // description: 'A Quasar Framework app',
+
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

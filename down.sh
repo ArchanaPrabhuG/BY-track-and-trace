@@ -10,7 +10,7 @@ docker image prune -a --force
 
 # docker system prune -a --force
 echo 'DELETEING CRYPTO FILES'
-cd nck-network
+cd by-network
 rm -rf channel-artifacts
 rm -rf crypto-configs
 rm -rf scripts

@@ -47,8 +47,8 @@ app.post('/api/addbatch', async (req, res) => {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
-        const contract = await network.getContract('nckcc');
+        const network = await gateway.getNetwork('bychannel');
+        const contract = await network.getContract('bycc');
         const buyResponse = await contract.submitTransaction('createBatch',
             req.body.rfid,
             req.body.drugname,
@@ -103,8 +103,8 @@ app.get('/api/find', async (req, res) => {
         };
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
-        const contract = await network.getContract('nckcc');
+        const network = await gateway.getNetwork('bychannel');
+        const contract = await network.getContract('bycc');
         const result = await contract.evaluateTransaction('getHistoryForBatch', id);
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json(result.toString());
@@ -152,8 +152,8 @@ app.get('/api/transferBatch', async (req, res) => {
         };
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
-        const contract = await network.getContract('nckcc');
+        const network = await gateway.getNetwork('bychannel');
+        const contract = await network.getContract('bycc');
          const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','kongez');
         console.log(`Transaction has been evaluated, result is: ${buyResponse.toString()}`);
         res.status(200).json(result.toString());

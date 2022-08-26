@@ -47,8 +47,8 @@ async function main () {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
-        const contract = await network.getContract('nckcc');
+        const network = await gateway.getNetwork('bychannel');
+        const contract = await network.getContract('bycc');
         const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','aurora');
 
     } catch (error) {
