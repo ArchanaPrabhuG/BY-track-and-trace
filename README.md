@@ -68,13 +68,14 @@ cd BY-track-and-trace
 
 Smartcontract ::
 cd smartcontracts
-sudo apt-get install npm
+
 nvm install 8.17.0
 npm install
 
 UI ::
 
 cd /BY-track-and-trace/ui
+
 nvm install 10
 npm install
 sudo npm install -g  @quasar/cli
@@ -109,7 +110,7 @@ quasar dev on ui folder
 
 Bring down the network
 1)./down.sh
-cd nck-network
+cd by-network
 rm -rf channel-artifacts
 rm -rf crypto-configs
 rm -rf scripts
