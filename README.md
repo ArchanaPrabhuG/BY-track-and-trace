@@ -120,11 +120,7 @@ quasar dev on ui folder
 
 Bring down the network
 1)./down.sh
-cd by-network
-rm -rf channel-artifacts
-rm -rf crypto-configs
-rm -rf scripts
-docker ps -a
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -138,6 +134,13 @@ If you want to tear down the vagrant - vagrant destroy followed by vargrant up p
 if you want to restart vagrant-vagrant reload
 
 If none of the commands work export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
+
+After bringing down the network using ./down.sh if you are still facing issue
+cd by-network
+rm -rf channel-artifacts
+rm -rf crypto-config
+rm -rf scripts
+docker ps -a
 
 
 cmd to Uninstall node:

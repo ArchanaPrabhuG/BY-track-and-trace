@@ -9,7 +9,7 @@ docker image prune -a --force
 
 
 # docker system prune -a --force
-echo 'DELETEING channel-artifacts , crypto-configs , scripts'
+echo 'DELETEING channel-artifacts , crypto-config , scripts'
 rm -rf by-network/channel-artifacts
-rm -rf by-network/crypto-configs
+rm -rf by-network/crypto-config
 rm -rf by-network/scripts
