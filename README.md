@@ -89,14 +89,24 @@ quasar dev
 
 If Above command is successful you will see -"Chaincode invoke successful. result: status:200"
 
-Only if above succeeded
+Only if above succeeded 
+
+
+*****Depending on the node you are bringing up update quasar config dev proxy port sup-3000,war-3001,iss-3030*****
 
 cd application/supplier
-nvm use 10
 npm install
-npm install --save cors
-node addToWallet.js
-node createBatch.js
+rm -rf _idwallet && node addToWallet.js && node createBatch.js
+npm start
+
+cd application/warehouse
+npm install
+rm -rf _idwallet && node addToWallet.js && node createBatch.js
+npm start
+
+cd application/issuer
+npm install
+rm -rf _idwallet && node addToWallet.js && node readBatch.js
 npm start
 
 On further logins
@@ -142,3 +152,4 @@ docker rm -f $(docker ps -a -q)
 
 
 npm install -g node-inspector
+npm install --save cors
