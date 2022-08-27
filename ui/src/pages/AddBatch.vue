@@ -41,7 +41,7 @@
         <div class="col">
           <p>Expire Date:</p>
           <q-date
-            v-model="exprie_date"
+            v-model="expiry_date"
             today-btn
           />
         </div>
@@ -73,7 +73,7 @@ export default {
       this.amount = ''
       this.organization = ''
       this.manufacture_date = ''
-      this.exprie_date = ''
+      this.expiry_date = ''
     },
     addBatch: function () {
       this.$axios.post(`/api/addbatch`, {
@@ -83,7 +83,7 @@ export default {
         amount: this.amount,
         organization: this.organization,
         manufacture_date: this.manufacture_date,
-        exprie_date: this.exprie_date
+        expiry_date: this.expiry_date
       }).then((resp) => {
         console.log(resp)
         this.$q.notify({
@@ -107,7 +107,7 @@ export default {
       amount: '',
       organization: '',
       manufacture_date: '',
-      exprie_date: ''
+      expiry_date: ''
     }
   }
 }

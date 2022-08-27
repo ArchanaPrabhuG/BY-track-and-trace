@@ -39,7 +39,7 @@ app.post('/api/addbatch', async (req, res) => {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const buyResponse = await contract.submitTransaction('createBatch',
             req.body.rfid,
@@ -47,7 +47,7 @@ app.post('/api/addbatch', async (req, res) => {
             req.body.amount,
             req.body.dosage,
             req.body.manufacture_date,
-            req.body.exprie_date,
+            req.body.expiry_date,
             "19",
             "33"
         );
@@ -95,7 +95,7 @@ app.get('/api/find', async (req, res) => {
         };
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const result = await contract.evaluateTransaction('getHistoryForBatch', id);
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
@@ -144,7 +144,7 @@ app.get('/api/transferBatch', async (req, res) => {
         };
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
          const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','kongez');
         console.log(`Transaction has been evaluated, result is: ${buyResponse.toString()}`);

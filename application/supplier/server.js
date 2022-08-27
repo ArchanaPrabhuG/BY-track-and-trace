@@ -42,7 +42,7 @@ app.post('/api/addbatch', async (req, res) => {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const buyResponse = await contract.submitTransaction('createBatch',
             req.body.rfid,
@@ -70,53 +70,6 @@ app.post('/api/addbatch', async (req, res) => {
     }
 });
 
-app.get('/api/find', async (req, res) => {
-    const id = req.query.batchId;
-
-    if (id === '') {
-        res.status(200).json({ result: [] })
-        return
-    }
-
-    // A gateway defines the peers used to access Fabric networks
-    const gateway = new Gateway();
-
-    // Main try/catch block
-    try {
-
-        // Specify userName for network access
-        const userName = 'Admin@supplier.nck.com';
-
-        // Load connection profile; will be used to locate a gateway
-        let connectionProfile = yaml.safeLoad(fs.readFileSync('./gateway/networkConnection.yaml', 'utf8'));
-
-        // Set connection options; identity and wallet
-        let connectionOptions = {
-            identity: userName,
-            wallet: wallet,
-            discovery: { enabled: false, asLocalhost: true }
-
-        };
-
-
-        await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
-        const contract = await network.getContract('nckcc');
-        const result = await contract.evaluateTransaction('getHistoryForBatch', id);
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-        res.status(200).json(result.toString());
-    } catch (error) {
-
-        console.log(`Error processing transaction. ${error}`);
-        console.log(error.stack);
-        res.status(500).json(error);
-    } finally {
-        // Disconnect from the gateway
-        console.log('Disconnect from Fabric gateway.');
-        gateway.disconnect();
-
-    }
-});
 
 app.post('/api/transportBatch', async (req, res) => {
     const id = req.query.batchId;
@@ -147,10 +100,10 @@ app.post('/api/transportBatch', async (req, res) => {
         };
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
          const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','kongez');
-        res.status(200).json("hi");
+        res.status(200).json(buyResponse.toString());
     } catch (error) {
 
         console.log(`Error processing transaction. ${error}`);
@@ -164,5 +117,55 @@ app.post('/api/transportBatch', async (req, res) => {
     }
 });
 
+
+app.get('/api/find', async (req, res) => {
+    const id = req.query.batchId;
+
+    if (id === '') {
+        res.status(200).json({ result: [] })
+        return
+    }
+
+													
+    // A gateway defines the peers used to access Fabric networks
+    const gateway = new Gateway();
+
+    // Main try/catch block
+    try {
+
+        // Specify userName for network access
+        const userName = 'Admin@supplier.nck.com';
+
+        // Load connection profile; will be used to locate a gateway
+        let connectionProfile = yaml.safeLoad(fs.readFileSync('./gateway/networkConnection.yaml', 'utf8'));
+
+        // Set connection options; identity and wallet
+        let connectionOptions = {
+            identity: userName,
+            wallet: wallet,
+            discovery: { enabled: false, asLocalhost: true }
+
+        };
+
+
+        await gateway.connect(connectionProfile, connectionOptions);
+        const network = await gateway.getNetwork('bychannel');
+        const contract = await network.getContract('nckcc');
+        const result = await contract.evaluateTransaction('getHistoryForBatch', id);
+        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        res.status(200).json(result.toString());
+    } catch (error) {
+
+        console.log(`Error processing transaction. ${error}`);
+        console.log(error.stack);
+        res.status(500).json(error);
+    } finally {
+															   
+        // Disconnect from the gateway
+        console.log('Disconnect from Fabric gateway.');
+        gateway.disconnect();
+
+    }
+});
 
 app.listen(port, () => console.log(`Supplier app listening on port ${port}!`))

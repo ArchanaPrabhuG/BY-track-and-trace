@@ -42,18 +42,18 @@ app.post('/api/addbatch', async (req, res) => {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const buyResponse = await contract.submitTransaction('createBatch',
             req.body.rfid,
             req.body.drugname,
             req.body.amount,
-            req.body.organization,
+            //req.body.organization,
             req.body.dosage,
             req.body.manufacture_date,
-            req.body.exprie_date,
-            19,
-            33
+            req.body.expiry_date,
+            '19',
+            '33'
         );
         res.status(201).json({ success: true });
     } catch (error) {
@@ -95,9 +95,10 @@ app.post('/api/transferBatch', async (req, res) => {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
-        const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','kongez');
+         const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','kongez');
+        res.status(200).json(buyResponse.toString());
     } catch (error) {
 
         console.log(`Error processing transaction. ${error}`);
@@ -143,7 +144,7 @@ app.get('/api/find', async (req, res) => {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const result = await contract.evaluateTransaction('getHistoryForBatch', id);
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);

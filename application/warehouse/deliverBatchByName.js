@@ -37,7 +37,7 @@ async function main () {
 
 
         await gateway.connect(connectionProfile, connectionOptions);
-        const network = await gateway.getNetwork('nckchannel');
+        const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const buyResponse = await contract.submitTransaction('transferBatchOnName', 'inferon','nova');
 

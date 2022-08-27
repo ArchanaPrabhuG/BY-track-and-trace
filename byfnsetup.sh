@@ -7,13 +7,13 @@ readiness_probe(){
   sleep 3
 }
 
-cd nck-network
+cd by-network
 chmod +x cryptogen
 chmod +x configtxgen
 
 export SYS_CHANNEL=byfn-sys-channel
 export COMPOSE_PROJECT_NAME=nck
-export CHANNEL_NAME=nckchannel
+export CHANNEL_NAME=bychannel
 
 
 #---------------------------------------------------------------------------------------------------------
@@ -43,11 +43,11 @@ echo "Generate channel artifacts"
 readiness_probe
 
 echo "Create anchor peers of the organizations"
-./configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/WarehouseMSPanchors.tx -channelID nckchannel -asOrg WarehouseMSP
+./configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/WarehouseMSPanchors.tx -channelID bychannel -asOrg WarehouseMSP
 
-./configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/IssuerMSPanchors.tx -channelID nckchannel -asOrg IssuerMSP
+./configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/IssuerMSPanchors.tx -channelID bychannel -asOrg IssuerMSP
 
-./configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/SupplierMSPanchors.tx -channelID nckchannel -asOrg SupplierMSP
+./configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/SupplierMSPanchors.tx -channelID bychannel -asOrg SupplierMSP
 readiness_probe
 
 #==================================================
@@ -57,7 +57,7 @@ readiness_probe
 export IMAGE_TAG=1.4.3
 export SYS_CHANNEL=byfn-sys-channel
 export COMPOSE_PROJECT_NAME=nck
-export CHANNEL_NAME=nckchannel
+export CHANNEL_NAME=bychannel
 
 echo "Creating containers... "
 
@@ -86,7 +86,7 @@ export ORDERER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/p
 
 echo "install channel"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="WarehouseMSP" \
   -e CORE_PEER_ADDRESS=peer0.warehouse.nck.com:7051 \
   -e CORE_PEER_MSPCONFIGPATH=$WAREHOUSE_MSPCONFIGPATH \
@@ -101,38 +101,38 @@ readiness_probe
 
 echo "install in the warehouse organization"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="WarehouseMSP" \
   -e CORE_PEER_ADDRESS=peer0.warehouse.nck.com:7051 \
   -e CORE_PEER_MSPCONFIGPATH=${WAREHOUSE_MSPCONFIGPATH} \
   -e CORE_PEER_TLS_ROOTCERT_FILE=${WAREHOUSE_TLS_ROOTCERT_FILE} \
   cli \
   peer channel join \
-    -b nckchannel.block 
+    -b bychannel.block
 readiness_probe
 
 echo "install in the supplier organization"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="SupplierMSP" \
   -e CORE_PEER_ADDRESS=peer0.supplier.nck.com:9051  \
   -e CORE_PEER_MSPCONFIGPATH=${SUPPLIER_MSPCONFIGPATH} \
   -e CORE_PEER_TLS_ROOTCERT_FILE=${SUPPLIER_TLS_ROOTCERT_FILE} \
   cli \
   peer channel join \
-  -b nckchannel.block 
+  -b bychannel.block
 readiness_probe
 
 echo "install in the issuer organization"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="IssuerMSP"  \
   -e CORE_PEER_ADDRESS=peer0.issuer.nck.com:10151  \
   -e CORE_PEER_MSPCONFIGPATH=${ISSUER_MSPCONFIGPATH} \
   -e CORE_PEER_TLS_ROOTCERT_FILE=${ISSUER_TLS_ROOTCERT_FILE} \
   cli \
   peer channel join \
-  -b nckchannel.block 
+  -b bychannel.block
 readiness_probe
 
 #==================================================
@@ -141,7 +141,7 @@ readiness_probe
 
 echo "Definition of warehouse anchor peer"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="WarehouseMSP" \
   -e CORE_PEER_ADDRESS=peer0.warehouse.nck.com:7051 \
   -e CORE_PEER_MSPCONFIGPATH=${WAREHOUSE_MSPCONFIGPATH} \
@@ -156,7 +156,7 @@ readiness_probe
 
 echo "Definition of supplier anchor peer"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="SupplierMSP" \
   -e CORE_PEER_ADDRESS=peer0.supplier.nck.com:9051  \
   -e CORE_PEER_MSPCONFIGPATH=${SUPPLIER_MSPCONFIGPATH} \
@@ -171,7 +171,7 @@ readiness_probe
 
 echo "Definition of issuer anchor peer"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="IssuerMSP"  \
   -e CORE_PEER_ADDRESS=peer0.issuer.nck.com:10151  \
   -e CORE_PEER_MSPCONFIGPATH=${ISSUER_MSPCONFIGPATH} \
@@ -194,7 +194,7 @@ readiness_probe
 
 echo "install chaincode in the warehouse peers"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="WarehouseMSP" \
   -e CORE_PEER_ADDRESS=peer0.warehouse.nck.com:7051 \
   -e CORE_PEER_MSPCONFIGPATH=${WAREHOUSE_MSPCONFIGPATH} \
@@ -209,7 +209,7 @@ readiness_probe
 
 echo "install chaincode in the supplier peers"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="SupplierMSP" \
   -e CORE_PEER_ADDRESS=peer0.supplier.nck.com:9051  \
   -e CORE_PEER_MSPCONFIGPATH=${SUPPLIER_MSPCONFIGPATH} \
@@ -224,7 +224,7 @@ readiness_probe
 
 echo "install chaincode in the issuer peers"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="IssuerMSP"  \
   -e CORE_PEER_ADDRESS=peer0.issuer.nck.com:10151  \
   -e CORE_PEER_MSPCONFIGPATH=${ISSUER_MSPCONFIGPATH} \
@@ -243,13 +243,13 @@ readiness_probe
 
 echo "instantiate chaincode"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="WarehouseMSP" \
   -e CORE_PEER_MSPCONFIGPATH=${WAREHOUSE_MSPCONFIGPATH} \
   cli \
   peer chaincode instantiate \
     -o orderer.nck.com:7050 \
-    -C nckchannel \
+    -C bychannel \
     -n nckcc \
     -l node \
     -v 1.0 \
@@ -266,7 +266,7 @@ readiness_probe
 #==================================================
 echo "invoke chaincode"
 docker exec \
-  -e CHANNEL_NAME=nckchannel \
+  -e CHANNEL_NAME=bychannel \
   -e CORE_PEER_LOCALMSPID="WarehouseMSP" \
   -e CORE_PEER_ADDRESS=peer0.warehouse.nck.com:7051 \
   -e CORE_PEER_MSPCONFIGPATH=${WAREHOUSE_MSPCONFIGPATH} \
@@ -275,7 +275,7 @@ docker exec \
   cli \
   peer chaincode invoke \
     -o orderer.nck.com:7050 \
-    -C nckchannel \
+    -C bychannel \
     -n nckcc \
     -c '{"function":"initLedger","Args":[]}' \
     --waitForEvent \
