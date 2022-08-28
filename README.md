@@ -52,9 +52,6 @@ go mod
 go env
 
 
-curl -sSL http://bit.ly/2ysbOFE | bash -s 1.4.3
-
-cd fabric-samples
 
 git clone https://github.com/ArchanaPrabhuG/BY-track-and-trace.git
 
@@ -62,15 +59,16 @@ git clone https://github.com/ArchanaPrabhuG/BY-track-and-trace.git
 chmod -R 777 BY-track-and-trace
 cd BY-track-and-trace
 
-./byfnsetup.sh
-
-
-
 Smartcontract ::
 cd smartcontracts
-
+sudo apt-get install npm
 nvm install 8.17.0
 npm install
+
+cd ..
+./byfnsetup.sh
+If Above command is successful you will see -"Chaincode invoke successful. result: status:200"
+
 
 UI ::
 
@@ -83,39 +81,55 @@ npm rebuild node-sass
 source ~/.bashrc
 quasar dev
 
+******************IMPORTANT********************
+ON EVERY LOGIN AFTER SETUP IS COMPLETE
+vagrant up
+./down.sh
+./byfnsetup.sh
 
+cd /BY-track-and-trace/ui
+quasar dev
 
+Followed by below depending on one or all all nodes should be up
 
-
-If Above command is successful you will see -"Chaincode invoke successful. result: status:200"
-
-Only if above succeeded 
-
-
-*****Depending on the node you are bringing up update quasar config dev proxy port sup-3000,war-3001,iss-3030*****
+*****Depending on the node you are bringing up update quasar config dev proxy port sup-3000,war-3001,iss-3002*****
 
 cd application/supplier
+nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node createBatch.js
+rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
+
+In case of changes only 
 npm start
 
 cd application/warehouse
+nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node createBatch.js
+rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
+
+on warehouse node 
+
+node deliverBatch.js 46793579024
+now you will see supplied by
+
+node acceptBatch.js 46793579024
+now you will see stored at
+
+
+
+
+In case of changes only
 npm start
 
 cd application/issuer
+nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node readBatch.js
+rm -rf _idwallet && node addToWallet.js && node readBatch.js && node server.js
+
+In case of changes only
 npm start
 
-On further logins
-vagrant up
-./down.sh delete the 3 folders
-./byfnsetup.sh
-npm start relevant folder within application
-quasar dev on ui folder
-
+ON UI view batch  : 46793579024
 
 
 Bring down the network
@@ -156,3 +170,8 @@ docker rm -f $(docker ps -a -q)
 
 npm install -g node-inspector
 npm install --save cors
+
+
+curl -sSL http://bit.ly/2ysbOFE | bash -s 1.4.3
+
+cd fabric-samples
