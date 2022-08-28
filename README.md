@@ -82,7 +82,7 @@ source ~/.bashrc
 quasar dev
 
 ******************IMPORTANT********************
-ON EVERY LOGIN AFTER SETUP IS COMPLETE
+ON EVERY LOGIN AFTER SETUP IS COMPLETE ONLY RUN BELOW COMMANDS
 vagrant up
 ./down.sh
 ./byfnsetup.sh
@@ -99,9 +99,6 @@ nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
 
-In case of changes only 
-npm start
-
 cd application/warehouse
 nvm use 10
 npm install
@@ -117,20 +114,15 @@ now you will see stored at
 
 
 
-
-In case of changes only
-npm start
-
 cd application/issuer
 nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node readBatch.js && node server.js
 
-In case of changes only
-npm start
-
 ON UI view batch  : 46793579024
 
+In case of server side code changes only in each of above nodes 
+npm start
 
 Bring down the network
 1)./down.sh
