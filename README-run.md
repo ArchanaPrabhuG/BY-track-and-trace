@@ -25,11 +25,13 @@ rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
 on warehouse node
 
 node deliverBatch.js 46793579024
-now you will see supplied by
+now you will see Supplied By    
 
 node acceptBatch.js 46793579024
-now you will see stored at
+now you will see Stored at
 
+node issueBatch.js 46793579024
+now you will see Pharmacy
 
 
 cd application/issuer
@@ -46,5 +48,9 @@ npm start
 In case of UI change:
 quasar dev
 
-Bring down the network
-1)./down.sh
+In case of change in smartcontract 
+npm install
+then Bring down the network
+./down.sh
+Bring up the network again
+./byfnsetup.sh

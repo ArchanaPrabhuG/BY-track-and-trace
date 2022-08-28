@@ -259,7 +259,7 @@ class NCKContract extends Contract {
   // ==================================================
   // delete - remove a batch key/value pair from state
   // ==================================================
-  async delete(ctx, RFIDbatchtag) {
+  async deleteBatch(ctx, RFIDbatchtag) {
 
     if (!RFIDbatchtag) {
       throw new Error('RFID batch tag must not be empty');
