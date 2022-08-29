@@ -2,7 +2,7 @@
 
 const express = require('express')
 const app = express()
-const port = 3030
+const port = 3002
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies

@@ -49,8 +49,9 @@ async function main () {
         await gateway.connect(connectionProfile, connectionOptions);
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
-        const result = await contract.evaluateTransaction('delete', '46793579024');
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+       const buyResponse = await contract.submitTransaction('delete', '46793579024');
+       res.status(200).json(buyResponse.toString());
+
 
 
     } catch (error) {

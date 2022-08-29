@@ -41,14 +41,17 @@ now you will see Supplied By
 node acceptBatch.js 46793579024
 now you will see Stored at
 
-node issueBatch.js 46793579024
-now you will see Pharmacy
+
+
 
 
 cd application/issuer
 nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node readBatch.js && node server.js
+
+node issueBatch.js 46793579024
+now you will see Pharmacy
 
 ON UI view batch  : 46793579024
 

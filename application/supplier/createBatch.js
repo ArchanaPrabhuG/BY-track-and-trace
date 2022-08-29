@@ -50,7 +50,7 @@ async function main () {
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const buyResponse = await contract.submitTransaction('createBatch', '126575953', 'Neupogen', '60', 'quient', '2019-08-15', '2020-01-12', '12', '17');
-		  console.log(buyResponse);
+		res.status(200).json(buyResponse.toString());
         
     } catch (error) {
 
