@@ -59,14 +59,14 @@ async function main () {
     } finally {
 
         // Disconnect from the gateway
-        console.log('Disconnect from Fabric gateway.');
+        console.log('Disconnect from Fabric gateway - issuer - queryBatch.');
         gateway.disconnect();
 
     }
 }
 main().then(() => {
 
-    console.log('Create batch complete.');
+    console.log('queryBatch complete.');
 
 }).catch((e) => {
 

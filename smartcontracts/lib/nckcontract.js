@@ -143,7 +143,7 @@ class NCKContract extends Contract {
   // createBatch - create a batch and add to the chaincode
   // =====================================================
     async createBatch(ctx, RFIDtag, drugName, amount, organization,dateManufactured, dateExpired, minTemp, maxTemp ) {
-      
+
         // ==== Check if batch already exists ====
         let drugbatchState = await ctx.stub.getState(RFIDtag);
         if (drugbatchState.toString()) {
@@ -259,7 +259,7 @@ class NCKContract extends Contract {
   // ==================================================
   // delete - remove a batch key/value pair from state
   // ==================================================
-  async deleteBatch(ctx, RFIDbatchtag) {
+  async delete(ctx, RFIDbatchtag) {
 
     if (!RFIDbatchtag) {
       throw new Error('RFID batch tag must not be empty');

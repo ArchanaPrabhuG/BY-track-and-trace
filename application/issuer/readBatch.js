@@ -51,14 +51,14 @@ async function main () {
     } finally {
 
         // Disconnect from the gateway
-        console.log('smart contract completeda');
+         console.log('Disconnect from Fabric gateway - issuer - getHistoryForBatch.');
         gateway.disconnect();
 
     }
 }
 main().then(() => {
 
-    console.log('Reading a batch is complete.');
+    console.log('getHistoryForBatch is complete.');
 
 }).catch((e) => {
 

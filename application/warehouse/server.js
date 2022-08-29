@@ -156,7 +156,7 @@ app.get('/api/find', async (req, res) => {
         res.status(500).json(error);
     } finally {
         // Disconnect from the gateway
-        console.log('Disconnect from Fabric gateway.');
+       console.log('Disconnect from Fabric gateway - warehouse - server.');
         gateway.disconnect();
 
     }

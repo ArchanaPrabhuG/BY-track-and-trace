@@ -1,11 +1,22 @@
 
-******************IMPORTANT********************
+**************************************
 ON EVERY LOGIN AFTER SETUP IS COMPLETE ONLY RUN BELOW COMMANDS
 vagrant up
 ./down.sh
+
+Smartcontract ::
+cd smartcontracts
+npm install
+
+cd ..
 ./byfnsetup.sh
 
 cd /BY-track-and-trace/ui
+nvm install 10
+npm install
+sudo npm install -g  @quasar/cli
+npm rebuild node-sass
+source ~/.bashrc
 quasar dev
 
 Followed by below depending on one or all all nodes should be up

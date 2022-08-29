@@ -64,7 +64,7 @@ app.post('/api/addbatch', async (req, res) => {
     } finally {
 
         // Disconnect from the gateway
-        console.log('Disconnect from Fabric gateway.');
+        console.log('Disconnect from Fabric gateway - supplier - server.');
         gateway.disconnect();
 
     }

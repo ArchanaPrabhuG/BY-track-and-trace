@@ -30,7 +30,9 @@ async function main() {
         const identityLabel = 'Admin@issuer.nck.com';
         const identity = X509WalletMixin.createIdentity('IssuerMSP', cert, key);
 
+
         await wallet.import(identityLabel, identity);
+        console.log(`Created identity for Pharmacist Susan`);
 
     } catch (error) {
         console.log(`Error adding to wallet. ${error}`);

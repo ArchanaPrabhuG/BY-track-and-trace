@@ -31,6 +31,7 @@ async function main() {
         const identity = X509WalletMixin.createIdentity('WarehouseMSP', cert, key);
 
         await wallet.import(identityLabel, identity);
+         console.log(`Created identity for Warehouse clerk Nick`);
 
     } catch (error) {
         console.log(`Error adding to wallet. ${error}`);

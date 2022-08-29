@@ -49,7 +49,7 @@ async function main () {
         await gateway.connect(connectionProfile, connectionOptions);
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
-        const result = await contract.evaluateTransaction('deleteBatch', '46793579024');
+        const result = await contract.evaluateTransaction('delete', '46793579024');
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
 
@@ -61,7 +61,7 @@ async function main () {
     } finally {
 
         // Disconnect from the gateway
-        console.log('Disconnect from Fabric gateway.');
+        console.log('Disconnect from Fabric gateway - warehouse - delete.');
         gateway.disconnect();
 
     }
