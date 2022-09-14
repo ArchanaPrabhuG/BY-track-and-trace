@@ -28,7 +28,7 @@
             heading
             v-if="transactions !== null && transactions.length > 0"
           >
-            Product History
+            Product Ledger
           </q-timeline-entry>
 
           <div>

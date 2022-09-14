@@ -59,7 +59,7 @@ In case of server side code changes only in relevant warehouse/supplier/issuer n
 npm start
 
 
-In case of UI change:
+In case of client change:
 quasar dev
 
 In case of change in chaincode 

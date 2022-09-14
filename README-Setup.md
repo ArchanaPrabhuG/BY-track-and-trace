@@ -84,12 +84,14 @@ quasar dev
 cd orgs/supplier
 nvm use 10
 npm install
-   rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
+rm -rf _idwallet && node addToWallet.js && node createBatch.js
+
+npm start
 
 cd orgs/warehouse
 nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
+rm -rf _idwallet && node addToWallet.js && node createBatch.js
 
 on warehouse node
 
@@ -99,10 +101,18 @@ now you will see supplied by
 node acceptBatch.js 46793579024
 now you will see stored at
 
+npm start
+
+
 cd orgs/issuer
 nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node readBatch.js && node server.js
+rm -rf _idwallet && node addToWallet.js && node readBatch.js
+
+Issue batch:
+node issueBatch.js 46793579024
+
+npm start
 
 ON client view batch  : 46793579024
 
