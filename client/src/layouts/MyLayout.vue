@@ -70,31 +70,31 @@ const menuList = [
   },
   {
     icon: 'library_add',
-    label: 'Add Batch',
+    label: 'Add Batch - Manufacturer',
     separator: false,
     to: '/addbatch'
   },
   {
     icon: 'fas fa-truck',
-    label: 'Transfer',
+    label: 'Supply Batch - Supplier',
     separator: true,
     to: '/transportbatch'
   },
   {
     icon: 'fas fa-clipboard-check',
-    label: 'Accept Batches',
+    label: 'Accept Batch - Into Warehouse',
     separator: false,
     to: '/acceptbatch'
   },
   {
     icon: 'fas fa-truck-loading',
-    label: 'Deliver',
+    label: 'Deliver Batch - From Warehouse',
     separator: true,
     to: '/deliverbatch'
   },
   {
     icon: 'assignment',
-    label: 'View History',
+    label: 'View History of the Batch',
     separator: true,
     to: '/viewbatch'
   }
