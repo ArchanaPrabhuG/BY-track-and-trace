@@ -81,12 +81,12 @@ npm rebuild node-sass
 source ~/.bashrc
 quasar dev
 
-cd application/supplier
+cd orgs/supplier
 nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
+   rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
 
-cd application/warehouse
+cd orgs/warehouse
 nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
@@ -99,7 +99,7 @@ now you will see supplied by
 node acceptBatch.js 46793579024
 now you will see stored at
 
-cd application/issuer
+cd orgs/issuer
 nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node readBatch.js && node server.js
@@ -110,7 +110,7 @@ In case of server side code changes only in each of above nodes
 npm start
 README.md
 Bring down the network
-1)./down.sh
+1)./byfndown.sh
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 

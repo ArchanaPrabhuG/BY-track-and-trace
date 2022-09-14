@@ -146,7 +146,7 @@ app.get('/api/transferBatch', async (req, res) => {
         await gateway.connect(connectionProfile, connectionOptions);
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
-         const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','kongez');
+         const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','Medco');
         console.log(`Transaction has been evaluated, result is: ${buyResponse.toString()}`);
         res.status(200).json(result.toString());
     } catch (error) {

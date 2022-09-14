@@ -23,12 +23,12 @@ Followed by below depending on one or all all nodes should be up
 
 *****Depending on the node you are bringing up update quasar config dev proxy port sup-3000,war-3001,iss-3002*****
 
-cd application/supplier
+cd orgs/supplier
 nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
 
-cd application/warehouse
+cd orgs/warehouse
 nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
@@ -45,7 +45,7 @@ now you will see Stored at
 
 
 
-cd application/issuer
+cd orgs/issuer
 nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node readBatch.js && node server.js

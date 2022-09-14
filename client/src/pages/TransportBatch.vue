@@ -32,7 +32,7 @@ export default {
   name: 'TransportBatch',
   data () {
     return {
-      options: ['kongez', 'hcl', 'medics', 'blc'],
+      options: ['Medco', 'BMYMed', 'NeoMedics', 'BLC'],
       organization: '',
       rfid: ''
     }

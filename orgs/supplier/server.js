@@ -102,7 +102,7 @@ app.post('/api/transportBatch', async (req, res) => {
         await gateway.connect(connectionProfile, connectionOptions);
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
-         const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','kongez');
+         const buyResponse = await contract.submitTransaction('transferBatch', '46793579024','Medco');
         res.status(200).json(buyResponse.toString());
     } catch (error) {
 
