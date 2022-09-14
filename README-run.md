@@ -2,14 +2,14 @@
 **************************************
 ON EVERY LOGIN AFTER SETUP IS COMPLETE ONLY RUN BELOW COMMANDS
 vagrant up
-./down.sh
+./byfndown.sh
 
-Smartcontract ::
-cd smartcontracts
+chaincode ::
+cd chaincode
 npm install
 
 cd ..
-./byfnsetup.sh
+./byfnup.sh
 
 cd /BY-track-and-trace/ui
 nvm install 10
@@ -62,9 +62,10 @@ npm start
 In case of UI change:
 quasar dev
 
-In case of change in smartcontract 
+In case of change in chaincode 
 npm install
 then Bring down the network
 ./down.sh
+docker ps -a
 Bring up the network again
-./byfnsetup.sh
+./byfnup.sh

@@ -1,7 +1,7 @@
 {
-    "name": "bysmartcontract",
+    "name": "chaincode",
     "version": "1.0.0",
-    "description": "smart contracts of by chaincode",
+    "description": "smart contracts of BY chaincode",
     "main": "index.js",
     "engines": {
         "node": ">=8",

@@ -59,20 +59,20 @@ git clone https://github.com/ArchanaPrabhuG/BY-track-and-trace.git
 chmod -R 777 BY-track-and-trace
 cd BY-track-and-trace
 
-Smartcontract ::
-cd smartcontracts
+chaincode ::
+cd chaincode
 sudo apt-get install npm
 nvm install 8.17.0
 npm install
 
 cd ..
-./byfnsetup.sh
+./byfnup.sh
 If Above command is successful you will see -"Chaincode invoke successful. result: status:200"
 
 
-UI ::
+Client ::
 
-cd /BY-track-and-trace/ui
+cd /BY-track-and-trace/client
 
 nvm install 10
 npm install
@@ -104,7 +104,7 @@ nvm use 10
 npm install
 rm -rf _idwallet && node addToWallet.js && node readBatch.js && node server.js
 
-ON UI view batch  : 46793579024
+ON client view batch  : 46793579024
 
 In case of server side code changes only in each of above nodes
 npm start
