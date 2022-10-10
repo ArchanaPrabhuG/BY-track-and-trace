@@ -160,13 +160,13 @@ export default {
       }).then((resp) => {
         console.log(resp)
         this.$q.notify({
-          message: 'Batch accepted',
+          message: 'Batch recalled',
           color: 'green'
         })
       }).catch(err => {
         console.log(err)
         this.$q.notify({
-          message: 'Failed to accept batch',
+          message: 'Failed to recall batch',
           color: 'red'
         })
       })

@@ -114,6 +114,7 @@ app.post('/api/transferBatch', async (req, res) => {
 });
 
 
+
 app.get('/api/find', async (req, res) => {
     const id = req.query.batchId;
 
@@ -203,4 +204,4 @@ app.delete('/api/delete', async (req, res) => {
     }
 });
 
-app.listen(port, () => console.log(`Supplier app listening on port ${port}!`))
+app.listen(port, () => console.log(`Warehouse app listening on port ${port}!`))
