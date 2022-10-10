@@ -47,6 +47,15 @@
               <div>
                 MaxTemp: {{transaction.Value.maxTemp}}
               </div>
+			  <div
+				v-if="transactions !== null && transaction.Value.maxTemp > 25"
+			  >
+				<q-btn
+					color="red"
+					label="Recall"
+					v-on:click="transportBatch"
+				/>
+			  </div>
             </q-timeline-entry>
           </div>
         </q-timeline>
@@ -143,6 +152,24 @@ export default {
   methods: {
     getTitle: function (idx) {
       return this.prefixes[idx]
+    },
+	transportBatch: function () {
+      this.$axios.post(`/api/transportBatch`, {
+        rfid: this.rfid,
+        organization: this.organization
+      }).then((resp) => {
+        console.log(resp)
+        this.$q.notify({
+          message: 'Batch accepted',
+          color: 'green'
+        })
+      }).catch(err => {
+        console.log(err)
+        this.$q.notify({
+          message: 'Failed to accept batch',
+          color: 'red'
+        })
+      })
     },
     search: function () {
       this.$axios.get(`/api/find?batchId=${this.batchID}`).then((resp) => {
