@@ -64,37 +64,19 @@
 const menuList = [
   {
     icon: 'dashboard',
-    label: 'Dashboard',
+    label: 'Home',
     separator: true,
     to: '/'
   },
   {
     icon: 'library_add',
-    label: 'Add Batch - Manufacturer',
+    label: 'Add Batch',
     separator: false,
     to: '/addbatch'
   },
   {
-    icon: 'fas fa-truck',
-    label: 'Supply Batch - Supplier',
-    separator: true,
-    to: '/transportbatch'
-  },
-  {
-    icon: 'fas fa-clipboard-check',
-    label: 'Accept Batch - Into Warehouse',
-    separator: false,
-    to: '/acceptbatch'
-  },
-  {
-    icon: 'fas fa-truck-loading',
-    label: 'Deliver Batch - From Warehouse',
-    separator: true,
-    to: '/deliverbatch'
-  },
-  {
     icon: 'assignment',
-    label: 'View History of the Batch',
+    label: 'Trace the Batch',
     separator: true,
     to: '/viewbatch'
   }

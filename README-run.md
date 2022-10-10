@@ -11,15 +11,15 @@ npm install
 cd ..
 ./byfnup.sh
 
-cd /BY-track-and-trace/ui
+cd /BY-track-and-trace/client
 nvm install 10
 npm install
-sudo npm install -g  @quasar/cli
+sudo npm install -g  @quasar/client
 npm rebuild node-sass
 source ~/.bashrc
 quasar dev
 
-Followed by below depending on one or all all nodes should be up
+Followed by below depending on one or all nodes should be up
 
 *****Depending on the node you are bringing up update quasar config dev proxy port sup-3000,war-3001,iss-3002*****
 

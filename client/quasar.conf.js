@@ -73,11 +73,11 @@ module.exports = function (ctx) {
         cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
+         // loader: 'eslint-loader',
           exclude: /node_modules/,
-          options: {
-            formatter: require('eslint').CLIEngine.getFormatter('stylish')
-          }
+          //options: {
+            //formatter: require('eslint').CLIEngine.getFormatter('stylish')
+          //}
         })
       }
     },
@@ -90,7 +90,7 @@ module.exports = function (ctx) {
 	   proxy: {
       // proxy all requests starting with /api to jsonplaceholder
       '/api': {
-        target: 'http://192.168.100.100:3000',
+        target: 'http://192.168.100.101:3000',
         changeOrigin: true
         
 	   }},
