@@ -172,6 +172,28 @@ class NCKContract extends Contract {
         await ctx.stub.putState(drugNameRFIDTagIndexKey, Buffer.from('\u0000'));    
         console.info('============= END : Create Batch ===========');
     }
+	
+	async updateBatch(ctx, RFIDtag, maxTemp) {
+        console.info('============= START : updateBatch ===========');
+
+        const batchAsBytes = await ctx.stub.getState(RFIDtag); // get the batch from chaincode state
+        if (!batchAsBytes || batchAsBytes.length === 0) {
+            throw new Error(`${RFIDtag} does not exist`);
+        }
+        let batchToUpdate = {};
+        try {
+          batchToUpdate = JSON.parse(batchAsBytes.toString()); //unmarshal
+        } catch (err) {
+          let jsonResp = {};
+          jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
+          throw new Error(jsonResp);
+        }
+        batchToUpdate.maxTemp = maxTemp; //change the organization
+    
+        let batchJSONasBytes = Buffer.from(JSON.stringify(batchToUpdate));
+        await ctx.stub.putState(RFIDtag, batchJSONasBytes); //rewrite the batch
+        console.info('============= END : update batch ===========');
+    }
 
     async transferBatch(ctx, RFIDtag, newOrganization) {
         console.info('============= START : changeOrganization ===========');
@@ -291,14 +313,44 @@ class NCKContract extends Contract {
     }
     //  Delete index entry to state.
     await ctx.stub.deleteState(nameTagIndexKey);
+	console.log('RFIDtag  deleted from the ledger Successfully..');
 
   }
   
   
   async deleteBatch(ctx,RFIDtag) {
    
-    await ctx.stub.deleteState(RFIDtag); 
-    console.log('RFIDtag  deleted from the ledger Successfully..');
+     if (!RFIDtag) {
+      throw new Error('RFID batch tag must not be empty');
+    }
+    // to maintain the color~name index, we need to read the marble first and get its color
+    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the marble from chaincode state
+    let jsonResp = {};
+    if (!RFIDBatchAsbytes) {
+      jsonResp.error = 'batch does not exist: ' + RFIDtag;
+      throw new Error(jsonResp);
+    }
+    let batchJSON = {};
+    try {
+      batchJSON = JSON.parse(RFIDtag.toString());
+    } catch (err) {
+      jsonResp = {};
+      jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
+      throw new Error(jsonResp);
+    }
+	
+
+    await stub.deleteState(RFIDtag); //remove the marble from chaincode state
+
+    // delete the index 
+    let indexName = 'drugName ~ RFIDtag';
+    let nameTagIndexKey = ctx.stub.createCompositeKey(indexName, [batchJSON.drugName, batchJSON.RFIDtag]);
+    if (!nameTagIndexKey) {
+      throw new Error(' Failed to create the createCompositeKey');
+    }
+    //  Delete index entry to state.
+    await ctx.stub.deleteState(nameTagIndexKey);
+	console.log('RFIDtag  deleted from the ledger Successfully..');
 
     }
 
@@ -370,6 +422,7 @@ class NCKContract extends Contract {
     let responsePayload = util.format('Transferred %s batch to %s', name, newOrganization);
     console.info('- end transferBatchBasedOnName: ' + responsePayload);
   }
+
 
 }
 

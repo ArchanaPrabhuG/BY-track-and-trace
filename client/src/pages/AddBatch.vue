@@ -14,12 +14,7 @@
         v-model="drugname"
         label="Drug Name"
       />
-      <q-input
-        outlined
-        v-model="dosage"
-        label="Dosage"
-      />
-      <q-input
+     <q-input
         outlined
         v-model="amount"
         label="Amount"
@@ -28,6 +23,16 @@
         outlined
         v-model="organization"
         label="Organization"
+      />
+	   <q-input
+        outlined
+        v-model="minTemp"
+        label="Min Temperature"
+      />
+	   <q-input
+        outlined
+        v-model="maxTemp"
+        label="Max Temperature"
       />
 
       <div class="row">
@@ -69,21 +74,23 @@ export default {
     clear: function () {
       this.rfid = ''
       this.drugname = ''
-      this.dosage = ''
       this.amount = ''
-      this.organization = ''
+      this.organization = ''	 
       this.manufacture_date = ''
       this.expiry_date = ''
+	  this.minTemp = ''
+	  this.maxTemp= ''
     },
     addBatch: function () {
       this.$axios.post(`/api/addbatch`, {
         rfid: this.rfid,
         drugname: this.drugname,
-        dosage: this.dosage,
         amount: this.amount,
-        organization: this.organization,
+        organization: this.organization,		
         manufacture_date: this.manufacture_date,
-        expiry_date: this.expiry_date
+        expiry_date: this.expiry_date,
+		minTemp: this.minTemp,
+		maxTemp: this.maxTemp
       }).then((resp) => {
         console.log(resp)
         this.$q.notify({
@@ -103,11 +110,12 @@ export default {
     return {
       rfid: '',
       drugname: '',
-      dosage: '',
       amount: '',
       organization: '',
       manufacture_date: '',
-      expiry_date: ''
+      expiry_date: '',
+	  minTemp: '',
+	  maxTemp: ''
     }
   }
 }

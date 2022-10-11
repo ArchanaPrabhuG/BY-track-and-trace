@@ -8,6 +8,8 @@ chaincode ::
 cd chaincode
 npm install
 
+any change to chiancode you just need to run npm install need not bring down the network
+
 cd ..
 ./byfnup.sh
 
@@ -40,7 +42,10 @@ now you will see Supplied By
 node acceptBatch.js 46793579024
 now you will see Stored at
 
-node issueBatch.js 46793579024
+node server.js deleteBatch 46793579024
+
+For custom batches 
+node server.js transferBatch
 now you will see Pharmacy
 
 
