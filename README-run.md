@@ -34,14 +34,14 @@ npm install
 rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
 
 on warehouse node
-
 node deliverBatch.js 46793579024
 now you will see Supplied By    
 
 node acceptBatch.js 46793579024
 now you will see Stored at
 
-
+node issueBatch.js 46793579024
+now you will see Pharmacy
 
 
 

@@ -53,7 +53,7 @@
 				<q-btn
 					color="red"
 					label="Recall"
-					v-on:click="transportBatch"
+					v-on:click="recallBatch"
 				/>
 			  </div>
             </q-timeline-entry>
@@ -158,6 +158,21 @@ export default {
         rfid: this.rfid,
         organization: this.organization
       }).then((resp) => {
+        console.log(resp)
+        this.$q.notify({
+          message: 'Batch recalled',
+          color: 'green'
+        })
+      }).catch(err => {
+        console.log(err)
+        this.$q.notify({
+          message: 'Failed to recall batch',
+          color: 'red'
+        })
+      })
+    },
+	recallBatch: function () {
+      this.$axios.delete(`/api/deleteBatch?batchId=${this.batchID}`).then((resp) => {
         console.log(resp)
         this.$q.notify({
           message: 'Batch recalled',
