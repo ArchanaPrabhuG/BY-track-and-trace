@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <div
+      <div
       class="q-gutter-md"
       style="width:700px; padding: 10px;"
     >
@@ -12,12 +12,21 @@
             label="BatchID"
           />
         </div>
+		&nbsp&nbsp&nbsp
         <div class="col-3">
           <q-btn
             color="primary"
             icon="search"
             label="Search"
             v-on:click="search"
+          />
+        </div>
+		 <div class="col-3">
+          <q-btn
+            color="primary"
+            icon="download"
+            label="download"
+             @click="exportPDF"
           />
         </div>
       </div>
@@ -206,6 +215,13 @@ export default {
       })
     }
   },
+   exportPDF: function() {
+      const doc = new Jspdf();
+      const contentHtml = this.$refs.qr.$el;
+      const image = contentHtml.toDataURL("image/jpeg", 0.8);
+      doc.addImage(image, "JPEG", 20, 20);
+      doc.save("sample.pdf");
+    },
   data () {
     return {
       batchID: '',
@@ -214,4 +230,5 @@ export default {
     }
   }
 }
+import Jspdf from "jspdf";
 </script>
