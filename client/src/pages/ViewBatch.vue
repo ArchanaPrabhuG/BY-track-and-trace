@@ -22,7 +22,7 @@
           <q-btn
             color="primary"
             icon="download"
-            label="download"
+            label="Report"
             v-on:click="generateReport"/>
           </div>
 		    </div>
