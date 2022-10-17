@@ -76,6 +76,7 @@ cd /BY-track-and-trace/client
 
 nvm install 10
 npm install
+npm i vue-html2pdf
 sudo npm install -g  @quasar/cli
 npm rebuild node-sass
 source ~/.bashrc

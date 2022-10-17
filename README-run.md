@@ -18,6 +18,7 @@ nvm install 10
 npm install
 sudo npm install -g  @quasar/client
 npm rebuild node-sass
+npm i vue-html2pdf
 source ~/.bashrc
 quasar dev
 
@@ -74,3 +75,6 @@ then Bring down the network
 docker ps -a
 Bring up the network again
 ./byfnup.sh
+
+
+https://medium.com/@toakshay.official/vue-js-generate-pdf-from-html-f095cf72bff4

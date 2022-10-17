@@ -1,5 +1,6 @@
 <template>
   <q-page class="flex flex-center">
+
       <div
       class="q-gutter-md"
       style="width:700px; padding: 10px;"
@@ -21,13 +22,16 @@
             v-on:click="search"
           />
         </div>
-		 <div class="col-3">
+		    <div class="col-3">
           <q-btn
             color="primary"
             icon="download"
             label="download"
-             @click="exportPDF"
+            v-on:click="generateReport"
           />
+          </div>
+		     <div>
+	       </div>
         </div>
       </div>
 
@@ -69,7 +73,20 @@
           </div>
         </q-timeline>
       </div>
-
+	  <VueHtml2pdf
+        :show-layout="false"
+        :float-layout="true"
+        :enable-download="true"
+        :preview-modal="true"
+        :paginate-elements-by-height="1400"
+        filename="TraceReport"
+        :pdf-quality="2"
+        :manual-pagination="false"
+        pdf-format="a4"
+        pdf-orientation="landscape"
+        pdf-content-width="800px"
+        ref="html2Pdf">
+	 <section slot="pdf-content">
       <div
         v-if="transactions !== null && transactions.length > 0"
         style="padding: 15px;"
@@ -149,8 +166,12 @@
             </q-card-section>
           </q-card>
         </div>
+
       </div>
+	    </section>
+    </VueHtml2pdf>
     </div>
+
 
   </q-page>
 </template>
@@ -158,6 +179,9 @@
 <script>
 export default {
   name: 'ViewBatch',
+    components: {
+        VueHtml2pdf
+    },
   methods: {
     getTitle: function (idx) {
       return this.prefixes[idx]
@@ -213,16 +237,12 @@ export default {
         })
         this.transactions = []
       })
-    }
-  },
-   exportPDF: function() {
-      const doc = new Jspdf();
-      const contentHtml = this.$refs.qr.$el;
-      const image = contentHtml.toDataURL("image/jpeg", 0.8);
-      doc.addImage(image, "JPEG", 20, 20);
-      doc.save("sample.pdf");
     },
-  data () {
+	 generateReport: function () {
+            this.$refs.html2Pdf.generatePdf()
+        }
+  },
+   data () {
     return {
       batchID: '',
       prefixes: ['Manufactured by', 'Supplied by', 'Stored at', 'Pharmacy'],
@@ -230,5 +250,5 @@ export default {
     }
   }
 }
-import Jspdf from "jspdf";
+import VueHtml2pdf from 'vue-html2pdf'
 </script>
