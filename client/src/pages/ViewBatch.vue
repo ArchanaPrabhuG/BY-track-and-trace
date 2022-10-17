@@ -1,17 +1,14 @@
 <template>
   <q-page class="flex flex-center">
-
       <div
-      class="q-gutter-md"
-      style="width:700px; padding: 10px;"
-    >
+        class="q-gutter-md"
+        style="width:700px; padding: 10px;">
       <div class="row">
         <div class="col">
           <q-input
             outlined
             v-model="batchID"
-            label="BatchID"
-          />
+            label="BatchID"/>
         </div>
 		&nbsp&nbsp&nbsp
         <div class="col-3">
@@ -19,61 +16,18 @@
             color="primary"
             icon="search"
             label="Search"
-            v-on:click="search"
-          />
+            v-on:click="search"/>
         </div>
 		    <div class="col-3">
           <q-btn
             color="primary"
             icon="download"
             label="download"
-            v-on:click="generateReport"
-          />
+            v-on:click="generateReport"/>
           </div>
-		     <div>
-	       </div>
-        </div>
+		    </div>
       </div>
-
-      <div class="q-px-lg q-pb-md">
-        <q-timeline color="secondary">
-          <q-timeline-entry
-            heading
-            v-if="transactions !== null && transactions.length > 0"
-          >
-            Product Ledger
-          </q-timeline-entry>
-
-          <div>
-            <q-timeline-entry
-              v-for="(transaction, i) in transactions"
-              v-bind:key="transaction.TxId"
-              :title="transaction.Value.organization"
-              :subtitle="getTitle(i)"
-            >
-              <div>
-                TXID: {{transaction.TxId}}
-              </div>
-              <div>
-                MinTemp: {{transaction.Value.minTemp}}
-              </div>
-              <div>
-                MaxTemp: {{transaction.Value.maxTemp}}
-              </div>
-			  <div
-				v-if="transactions !== null && transaction.Value.maxTemp > 25"
-			  >
-				<q-btn
-					color="red"
-					label="Recall"
-					v-on:click="recallBatch"
-				/>
-			  </div>
-            </q-timeline-entry>
-          </div>
-        </q-timeline>
-      </div>
-	  <VueHtml2pdf
+    <VueHtml2pdf
         :show-layout="false"
         :float-layout="true"
         :enable-download="true"
@@ -87,27 +41,56 @@
         pdf-content-width="800px"
         ref="html2Pdf">
 	 <section slot="pdf-content">
-      <div
+      <div class="q-px-lg q-pb-md">
+        <q-timeline color="secondary">
+          <q-timeline-entry
+            heading
+            v-if="transactions !== null && transactions.length > 0">
+            Product Ledger
+          </q-timeline-entry>
+          <div>
+            <q-timeline-entry
+              v-for="(transaction, i) in transactions"
+              v-bind:key="transaction.TxId"
+              :title="transaction.Value.organization"
+              :subtitle="getTitle(i)">
+              <div>
+                TXID: {{transaction.TxId}}
+              </div>
+              <div>
+                MinTemp: {{transaction.Value.minTemp}}
+              </div>
+              <div>
+                MaxTemp: {{transaction.Value.maxTemp}}
+              </div>
+			  <div
+				v-if="transactions !== null && transaction.Value.maxTemp > 25">
+				<q-btn
+					color="red"
+					label="Recall"
+					v-on:click="recallBatch"/>
+			  </div>
+            </q-timeline-entry>
+          </div>
+        </q-timeline>
+      </div>
+	  <div
         v-if="transactions !== null && transactions.length > 0"
-        style="padding: 15px;"
-      >
+        style="padding: 15px;">
         <div
           class="items-start q-gutter-md"
-          style="padding: 5px;"
-        >
+          style="padding: 5px;">
           <q-card class="my-card">
             <q-card-section>
               <div class="text-h6">
                 Product Details
               </div>
             </q-card-section>
-
             <q-card-section>
               <q-list>
                 <q-item
                   clickable
-                  v-ripple
-                >
+                  v-ripple>
                   <q-item-section>
                     <q-item-label overline>Drug Name</q-item-label>
                     <q-item-label>{{transactions[0].Value.drugName}}</q-item-label>
@@ -115,8 +98,7 @@
                 </q-item>
                 <q-item
                   clickable
-                  v-ripple
-                >
+                  v-ripple>
                   <q-item-section>
                     <q-item-label overline>Amount</q-item-label>
                     <q-item-label>{{transactions[0].Value.amount}}</q-item-label>
@@ -124,8 +106,7 @@
                 </q-item>
                 <q-item
                   clickable
-                  v-ripple
-                >
+                  v-ripple>
                   <q-item-section>
                     <q-item-label overline>Date Manufactured</q-item-label>
                     <q-item-label>{{transactions[0].Value.dateManufactured}}</q-item-label>
@@ -133,18 +114,15 @@
                 </q-item>
                 <q-item
                   clickable
-                  v-ripple
-                >
+                  v-ripple>
                   <q-item-section>
                     <q-item-label overline>Date Expired</q-item-label>
                     <q-item-label>{{transactions[0].Value.dateExpired}}</q-item-label>
                   </q-item-section>
                 </q-item>
-
-                <!-- <q-item
+                <q-item
                   clickable
-                  v-ripple
-                >
+                  v-ripple>
                   <q-item-section>
                     <q-item-label overline>Min Temperature</q-item-label>
                     <q-item-label>{{transactions[0].Value.minTemp}}</q-item-label>
@@ -153,26 +131,122 @@
 
                 <q-item
                   clickable
-                  v-ripple
-                >
+                  v-ripple>
                   <q-item-section>
                     <q-item-label overline>Max Temperature</q-item-label>
                     <q-item-label>{{transactions[0].Value.maxTemp}}</q-item-label>
                   </q-item-section>
-                </q-item> -->
-
+                </q-item>
               </q-list>
-
             </q-card-section>
           </q-card>
         </div>
-
       </div>
-	    </section>
+	 </section>
     </VueHtml2pdf>
+	 <div class="q-px-lg q-pb-md">
+        <q-timeline color="secondary">
+          <q-timeline-entry
+            heading
+            v-if="transactions !== null && transactions.length > 0">
+            Product Ledger
+          </q-timeline-entry>
+          <div>
+            <q-timeline-entry
+              v-for="(transaction, i) in transactions"
+              v-bind:key="transaction.TxId"
+              :title="transaction.Value.organization"
+              :subtitle="getTitle(i)">
+              <div>
+                TXID: {{transaction.TxId}}
+              </div>
+              <div>
+                MinTemp: {{transaction.Value.minTemp}}
+              </div>
+              <div>
+                MaxTemp: {{transaction.Value.maxTemp}}
+              </div>
+			  <div
+				v-if="transactions !== null && transaction.Value.maxTemp > 25">
+				<q-btn
+					color="red"
+					label="Recall"
+					v-on:click="recallBatch"
+				/>
+			  </div>
+            </q-timeline-entry>
+          </div>
+        </q-timeline>
+      </div>
+	  <div
+        v-if="transactions !== null && transactions.length > 0"
+        style="padding: 15px;">
+        <div
+          class="items-start q-gutter-md"
+          style="padding: 5px;">
+          <q-card class="my-card">
+            <q-card-section>
+              <div class="text-h6">
+                Product Details
+              </div>
+            </q-card-section>
+            <q-card-section>
+              <q-list>
+                <q-item
+                  clickable
+                  v-ripple>
+                  <q-item-section>
+                    <q-item-label overline>Drug Name</q-item-label>
+                    <q-item-label>{{transactions[0].Value.drugName}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item
+                  clickable
+                  v-ripple>
+                  <q-item-section>
+                    <q-item-label overline>Amount</q-item-label>
+                    <q-item-label>{{transactions[0].Value.amount}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item
+                  clickable
+                  v-ripple>
+                  <q-item-section>
+                    <q-item-label overline>Date Manufactured</q-item-label>
+                    <q-item-label>{{transactions[0].Value.dateManufactured}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item
+                  clickable
+                  v-ripple>
+                  <q-item-section>
+                    <q-item-label overline>Date Expired</q-item-label>
+                    <q-item-label>{{transactions[0].Value.dateExpired}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item
+                  clickable
+                  v-ripple>
+                  <q-item-section>
+                    <q-item-label overline>Min Temperature</q-item-label>
+                    <q-item-label>{{transactions[0].Value.minTemp}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+                <q-item
+                  clickable
+                  v-ripple>
+                  <q-item-section>
+                    <q-item-label overline>Max Temperature</q-item-label>
+                    <q-item-label>{{transactions[0].Value.maxTemp}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
     </div>
-
-
   </q-page>
 </template>
 
