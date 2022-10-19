@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e6e7503d-295c-4a20-8a9c-3cac5eaa243c",
+		"_postman_id": "98062019-3f92-43ad-8032-48685957d860",
 		"name": "APIS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -41,7 +41,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n    \"drugname\": \"Crocin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"GSK Healthcare\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"2\",\r\n    \"maxTemp\": \"8\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n    \"drugname\": \"Crocin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"GSK Healthcare\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"2\",\r\n    \"maxTemp\": \"8\",\r\n    \"isUpdate\": \"false\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.100:8080/api/addbatch",
@@ -97,7 +97,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"4\",\r\n    \"drugname\": \"Anacin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"Biocon\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"15\",\r\n    \"maxTemp\": \"27\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"4\",\r\n     \"maxTemp\": \"27\",\r\n     \"isUpdate\": \"true\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.100:8080/api/updateBatch",
