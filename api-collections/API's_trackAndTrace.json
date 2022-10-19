@@ -41,7 +41,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"4\",\r\n    \"drugname\": \"Anacin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"Biocon\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"15\",\r\n    \"maxTemp\": \"27\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n    \"drugname\": \"Crocin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"GSK Healthcare\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"2\",\r\n    \"maxTemp\": \"8\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.100:8080/api/addbatch",
@@ -153,7 +153,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"4\",\r\n     \"organization\": \"Biocon1\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"ECHEMI\",\r\n     \"maxTemp\": \"9\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.100:8080/api/transferBatch",
@@ -278,7 +278,7 @@
 					"query": [
 						{
 							"key": "batchId",
-							"value": "3"
+							"value": "1"
 						}
 					]
 				}
