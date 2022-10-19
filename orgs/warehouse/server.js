@@ -52,7 +52,8 @@ app.post('/api/addbatch', async (req, res) => {
             req.body.manufacture_date,
             req.body.expiry_date,
             req.body.minTemp,
-            req.body.maxTemp
+            req.body.maxTemp,
+            req.body.isUpdate
         );
         res.status(201).json({ success: true });
     } catch (error) {
@@ -122,10 +123,11 @@ app.get('/api/find', async (req, res) => {
     }
 });
 
+
 app.delete('/api/deleteBatch', async (req, res) => {
     // A gateway defines the peers used to access Fabric networks
     const gateway = new Gateway();
-const id = req.query.batchId;
+    const id = req.query.batchId;
     // Main try/catch block
     try {
 
@@ -156,9 +158,8 @@ const id = req.query.batchId;
         console.log(error.stack);
         res.status(500).json({ success: false, error: error });
     } finally {
-
         // Disconnect from the gateway
-        console.log('Disconnect from Fabric gateway.');
+       console.log('Disconnect from Fabric gateway - warehouse - server.');
         gateway.disconnect();
 
     }
@@ -192,7 +193,8 @@ app.post('/api/updateBatch', async (req, res) => {
 		  console.log('update batch');
          const buyResponse = await contract.submitTransaction('updateBatch',
             req.body.rfid,
-            req.body.maxTemp
+            req.body.maxTemp,
+            req.body.isUpdate
         );
         res.status(200).json(buyResponse.toString());
     } catch (error) {
@@ -215,6 +217,7 @@ app.post('/api/transferBatch', async (req, res) => {
     const gateway = new Gateway();
 	const id = req.query.batchId;
 	const newOrg = req.query.organization;
+	const maxTemp = req.query.maxTemp;
     // Main try/catch block
     try {
 
@@ -238,7 +241,8 @@ app.post('/api/transferBatch', async (req, res) => {
         const contract = await network.getContract('nckcc');
         const buyResponse = await contract.submitTransaction('transferBatch',
             req.body.rfid,
-            req.body.organization
+            req.body.organization,
+			req.body.maxTemp
         );
 		 console.log('Batch Transferred.');
         res.status(200).json(buyResponse.toString());

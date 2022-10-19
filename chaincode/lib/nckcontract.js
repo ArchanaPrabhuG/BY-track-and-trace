@@ -119,7 +119,7 @@ class NCKContract extends Contract {
             let indexName = 'drugName ~ RFIDtag'
             let drugNameRFIDTagIndexKey = await ctx.stub.createCompositeKey(indexName, [batch[i].drugName, batch[i].RFIDtag]);
             await ctx.stub.putState(drugNameRFIDTagIndexKey, Buffer.from('\u0000'));
-        
+
             console.info('Added <--> ', batch[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
@@ -142,7 +142,7 @@ class NCKContract extends Contract {
   // =====================================================
   // createBatch - create a batch and add to the chaincode
   // =====================================================
-    async createBatch(ctx, RFIDtag, drugName, amount, organization,dateManufactured, dateExpired, minTemp, maxTemp ) {
+    async createBatch(ctx, RFIDtag, drugName, amount, organization,dateManufactured, dateExpired, minTemp, maxTemp,isUpdate ) {
 
         // ==== Check if batch already exists ====
         let drugbatchState = await ctx.stub.getState(RFIDtag);
@@ -163,17 +163,18 @@ class NCKContract extends Contract {
             dateExpired,
             minTemp,
             maxTemp,
+			isUpdate
         };
         await ctx.stub.putState(RFIDtag, Buffer.from(JSON.stringify(batch)));
         let indexName = 'drugName ~ RFIDtag'
         let drugNameRFIDTagIndexKey = await ctx.stub.createCompositeKey(indexName, [batch.drugName, batch.RFIDtag]);
         //  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the batch.
         //  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
-        await ctx.stub.putState(drugNameRFIDTagIndexKey, Buffer.from('\u0000'));    
+        await ctx.stub.putState(drugNameRFIDTagIndexKey, Buffer.from('\u0000'));
         console.info('============= END : Create Batch ===========');
     }
-	
-	async updateBatch(ctx, RFIDtag, maxTemp) {
+
+	async updateBatch(ctx, RFIDtag, maxTemp,isUpdate) {
         console.info('============= START : updateBatch ===========');
 
         const batchAsBytes = await ctx.stub.getState(RFIDtag); // get the batch from chaincode state
@@ -188,14 +189,15 @@ class NCKContract extends Contract {
           jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
           throw new Error(jsonResp);
         }
-        batchToUpdate.maxTemp = maxTemp; //change the organization
-    
+        batchToUpdate.maxTemp = maxTemp; //change temp
+		batchToUpdate.isUpdate = isUpdate;
+
         let batchJSONasBytes = Buffer.from(JSON.stringify(batchToUpdate));
         await ctx.stub.putState(RFIDtag, batchJSONasBytes); //rewrite the batch
         console.info('============= END : update batch ===========');
     }
 
-    async transferBatch(ctx, RFIDtag, newOrganization) {
+    async transferBatch(ctx, RFIDtag, newOrganization,maxTemp) {
         console.info('============= START : changeOrganization ===========');
 
         const batchAsBytes = await ctx.stub.getState(RFIDtag); // get the batch from chaincode state
@@ -211,7 +213,10 @@ class NCKContract extends Contract {
           throw new Error(jsonResp);
         }
         batchToTransfer.organization = newOrganization; //change the organization
-    
+		if (maxTemp) {
+			batchToTransfer.maxTemp = maxTemp; //change the maxTemp
+		}	
+
         let batchJSONasBytes = Buffer.from(JSON.stringify(batchToTransfer));
         await ctx.stub.putState(RFIDtag, batchJSONasBytes); //rewrite the batch
         console.info('============= END : changeOrganization ===========');
@@ -258,12 +263,12 @@ class NCKContract extends Contract {
 
     async getHistoryForBatch(ctx, RFIDtag) {
 
-        console.info('- start getHistoryForBatch: %s\n', RFIDtag);  
+        console.info('- start getHistoryForBatch: %s\n', RFIDtag);
         let resultsIterator = await ctx.stub.getHistoryForKey(RFIDtag);
-        let results = await this.getAllResults(resultsIterator, true);   
+        let results = await this.getAllResults(resultsIterator, true);
         return JSON.stringify(results);
 
-    } 
+    }
 
     async readBatch(ctx, RFIDtag) {
       let resultsIterator = await ctx.stub.getHistoryForKey(RFIDtag);
@@ -277,7 +282,7 @@ class NCKContract extends Contract {
       return results.toString();
 
     }
-    
+
   // ==================================================
   // delete - remove a batch key/value pair from state
   // ==================================================
@@ -286,8 +291,8 @@ class NCKContract extends Contract {
     if (!RFIDtag) {
       throw new Error('RFID batch tag must not be empty');
     }
-    // to maintain the color~name index, we need to read the marble first and get its color
-    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the marble from chaincode state
+    // to maintain the color~name index, we need to read the record first and get its color
+    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the record from chaincode state
     let jsonResp = {};
     if (!RFIDBatchAsbytes) {
       jsonResp.error = 'batch does not exist: ' + RFIDtag;
@@ -301,11 +306,11 @@ class NCKContract extends Contract {
       jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
       throw new Error(jsonResp);
     }
-	
 
-    await stub.deleteState(RFIDtag); //remove the marble from chaincode state
 
-    // delete the index 
+    await stub.deleteState(RFIDtag); //remove the record from chaincode state
+
+    // delete the index
     let indexName = 'drugName ~ RFIDtag';
     let nameTagIndexKey = ctx.stub.createCompositeKey(indexName, [batchJSON.drugName, batchJSON.RFIDtag]);
     if (!nameTagIndexKey) {
@@ -316,15 +321,15 @@ class NCKContract extends Contract {
 	console.log('RFIDtag  deleted from the ledger Successfully..');
 
   }
-  
-  
+
+
   async deleteBatch(ctx,RFIDtag) {
-   
+
      if (!RFIDtag) {
       throw new Error('RFID batch tag must not be empty');
     }
-    // to maintain the color~name index, we need to read the marble first and get its color
-    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the marble from chaincode state
+    // to maintain the color~name index, we need to read the record first and get its color
+    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the record from chaincode state
     let jsonResp = {};
     if (!RFIDBatchAsbytes) {
       jsonResp.error = 'batch does not exist: ' + RFIDtag;
@@ -338,7 +343,7 @@ class NCKContract extends Contract {
       jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
       throw new Error(jsonResp);
     }
-	
+
 
     await stub.deleteState(RFIDtag); //remove the marble from chaincode state
 
