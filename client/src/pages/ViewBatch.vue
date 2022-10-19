@@ -63,14 +63,7 @@
               <div>
                 MaxTemp: {{transaction.Value.maxTemp}}
               </div>
-			  <div
-				v-if="transactions !== null && transaction.Value.maxTemp > 25">
-				<q-btn
-					color="red"
-					label="Recall"
-					v-on:click="recallBatch"/>
-			  </div>
-            </q-timeline-entry>
+			      </q-timeline-entry>
           </div>
         </q-timeline>
       </div>
@@ -258,7 +251,10 @@ export default {
     },
   methods: {
     getTitle: function (idx) {
-      return this.prefixes[idx]
+		if (idx+1 === this.transactions.length && this.transactions.length >0 ) {
+          return this.prefixes[4]
+        }
+		return this.prefixes[idx]
     },
 	transportBatch: function () {
       this.$axios.post(`/api/transportBatch`, {
@@ -319,7 +315,7 @@ export default {
    data () {
     return {
       batchID: '',
-      prefixes: ['Manufactured by', 'Supplied by', 'Stored at', 'Pharmacy'],
+      prefixes: ['Manufactured by', 'Supplied by', 'Stored at', 'Pharmacy','Recalled'],
       transactions: []
     }
   }

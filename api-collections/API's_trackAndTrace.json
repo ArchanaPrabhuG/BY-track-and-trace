@@ -28,11 +28,11 @@
 					},
 					{
 						"key": "Origin",
-						"value": "http://192.168.100.101:8080"
+						"value": "http://192.168.100.100:8080"
 					},
 					{
 						"key": "Referer",
-						"value": "http://192.168.100.101:8080/"
+						"value": "http://192.168.100.100:8080/"
 					},
 					{
 						"key": "User-Agent",
@@ -44,7 +44,7 @@
 					"raw": "{\r\n    \"rfid\": \"4\",\r\n    \"drugname\": \"Anacin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"Biocon\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"15\",\r\n    \"maxTemp\": \"27\"\r\n}"
 				},
 				"url": {
-					"raw": "http://192.168.100.101:8080/api/addbatch",
+					"raw": "http://192.168.100.100:8080/api/addbatch",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -84,11 +84,11 @@
 					},
 					{
 						"key": "Origin",
-						"value": "http://192.168.100.101:8080"
+						"value": "http://192.168.100.100:8080"
 					},
 					{
 						"key": "Referer",
-						"value": "http://192.168.100.101:8080/"
+						"value": "http://192.168.100.100:8080/"
 					},
 					{
 						"key": "User-Agent",
@@ -100,7 +100,7 @@
 					"raw": "{\r\n    \"rfid\": \"4\",\r\n    \"drugname\": \"Anacin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"Biocon\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"15\",\r\n    \"maxTemp\": \"27\"\r\n}"
 				},
 				"url": {
-					"raw": "http://192.168.100.101:8080/api/updateBatch",
+					"raw": "http://192.168.100.100:8080/api/updateBatch",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -140,11 +140,11 @@
 					},
 					{
 						"key": "Origin",
-						"value": "http://192.168.100.101:8080"
+						"value": "http://192.168.100.100:8080"
 					},
 					{
 						"key": "Referer",
-						"value": "http://192.168.100.101:8080/"
+						"value": "http://192.168.100.100:8080/"
 					},
 					{
 						"key": "User-Agent",
@@ -156,7 +156,7 @@
 					"raw": "{\r\n    \"rfid\": \"4\",\r\n     \"organization\": \"Biocon1\"\r\n}"
 				},
 				"url": {
-					"raw": "http://192.168.100.101:8080/api/transferBatch",
+					"raw": "http://192.168.100.100:8080/api/transferBatch",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -168,6 +168,118 @@
 					"path": [
 						"api",
 						"transferBatch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBatch",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					},
+					{
+						"key": "Origin",
+						"value": "http://192.168.100.100:8080"
+					},
+					{
+						"key": "Referer",
+						"value": "http://192.168.100.100:8080/"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.100.100:8080/api/deleteBatch?batchId=1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"100",
+						"101"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"deleteBatch"
+					],
+					"query": [
+						{
+							"key": "batchId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findBatch",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "If-None-Match",
+						"value": "W/\"1b1-g7a4KG/+V7jbqAaD3MxnQPzKAwQ\""
+					},
+					{
+						"key": "Referer",
+						"value": "http://192.168.100.100:8080/"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.100.100:8080/api/find?batchId=3",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"100",
+						"101"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"find"
+					],
+					"query": [
+						{
+							"key": "batchId",
+							"value": "3"
+						}
 					]
 				}
 			},
