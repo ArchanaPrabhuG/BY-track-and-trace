@@ -150,7 +150,7 @@ app.delete('/api/deleteBatch', async (req, res) => {
         const contract = await network.getContract('nckcc');
 		console.log('delete batch');
         const buyResponse = await contract.submitTransaction('deleteBatch', id);
-        res.status(200).json(buyResponse.toString());
+         res.status(204).json({ success: true });
     } catch (error) {
 
         console.log(`Error processing transaction. ${error}`);
@@ -195,7 +195,7 @@ app.post('/api/updateBatch', async (req, res) => {
             req.body.maxTemp,
             req.body.isUpdate
         );
-        res.status(200).json(buyResponse.toString());
+        res.status(204).json({ success: true });
     } catch (error) {
 
         console.log(`Error processing transaction. ${error}`);
@@ -243,8 +243,8 @@ app.post('/api/transferBatch', async (req, res) => {
             req.body.organization,
 			req.body.maxTemp
         );
-		 console.log('Batch Transferred.');
-        res.status(200).json(buyResponse.toString());
+		console.log('Batch Transferred.');
+        res.status(204).json({ success: true });
     } catch (error) {
 
         console.log(`Error processing transaction. ${error}`);
