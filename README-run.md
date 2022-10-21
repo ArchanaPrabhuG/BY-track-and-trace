@@ -14,7 +14,7 @@ chaincode ::
 cd chaincode
 npm install
 
-any change to chiancode you just need to run npm install need not bring down the network
+any change to chaincode you just need to run npm install need not bring down the network
 
 cd ..
 ./byfnup.sh
