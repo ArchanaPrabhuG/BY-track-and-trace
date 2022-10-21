@@ -52,8 +52,7 @@ app.post('/api/addbatch', async (req, res) => {
             req.body.manufacture_date,
             req.body.expiry_date,
             req.body.minTemp,
-            req.body.maxTemp,
-            req.body.isUpdate
+            req.body.maxTemp
         );
         res.status(201).json({ success: true });
     } catch (error) {

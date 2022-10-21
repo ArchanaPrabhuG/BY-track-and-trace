@@ -142,7 +142,7 @@ class NCKContract extends Contract {
   // =====================================================
   // createBatch - create a batch and add to the chaincode
   // =====================================================
-    async createBatch(ctx, RFIDtag, drugName, amount, organization,dateManufactured, dateExpired, minTemp, maxTemp,isUpdate ) {
+    async createBatch(ctx, RFIDtag, drugName, amount, organization,dateManufactured, dateExpired, minTemp, maxTemp ) {
 
         // ==== Check if batch already exists ====
         let drugbatchState = await ctx.stub.getState(RFIDtag);
@@ -162,8 +162,7 @@ class NCKContract extends Contract {
             dateManufactured,
             dateExpired,
             minTemp,
-            maxTemp,
-			isUpdate
+            maxTemp
         };
         await ctx.stub.putState(RFIDtag, Buffer.from(JSON.stringify(batch)));
         let indexName = 'drugName ~ RFIDtag'
@@ -213,9 +212,11 @@ class NCKContract extends Contract {
           throw new Error(jsonResp);
         }
         batchToTransfer.organization = newOrganization; //change the organization
-		if (maxTemp) {
+			if (maxTemp) {
 			batchToTransfer.maxTemp = maxTemp; //change the maxTemp
 		}	
+
+																			
 
         let batchJSONasBytes = Buffer.from(JSON.stringify(batchToTransfer));
         await ctx.stub.putState(RFIDtag, batchJSONasBytes); //rewrite the batch
@@ -342,10 +343,10 @@ class NCKContract extends Contract {
       jsonResp = {};
       jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
       throw new Error(jsonResp);
-    }
-
+    }															   
 
     await stub.deleteState(RFIDtag); //remove the marble from chaincode state
+	console.log('delete state done..');
 
     // delete the index 
     let indexName = 'drugName ~ RFIDtag';
@@ -355,6 +356,7 @@ class NCKContract extends Contract {
     }
     //  Delete index entry to state.
     await ctx.stub.deleteState(nameTagIndexKey);
+	console.log('deleted nameTagIndexKey..');
 	console.log('RFIDtag  deleted from the ledger Successfully..');
 
     }

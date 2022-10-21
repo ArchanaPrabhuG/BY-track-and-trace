@@ -75,7 +75,7 @@ export default {
       this.rfid = ''
       this.drugname = ''
       this.amount = ''
-      this.organization = ''	 
+      this.organization = ''
       this.manufacture_date = ''
       this.expiry_date = ''
 	  this.minTemp = ''
@@ -86,7 +86,7 @@ export default {
         rfid: this.rfid,
         drugname: this.drugname,
         amount: this.amount,
-        organization: this.organization,		
+        organization: this.organization,
         manufacture_date: this.manufacture_date,
         expiry_date: this.expiry_date,
 		minTemp: this.minTemp,

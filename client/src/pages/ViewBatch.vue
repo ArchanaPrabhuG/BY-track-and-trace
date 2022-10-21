@@ -1,5 +1,12 @@
 <template>
-  <q-page class="flex flex-center">
+<q-page class="flex flex-center">
+  <div class="q-px-lg q-pb-md">
+          <q-btn
+            color="primary"
+            icon="download"
+            label="Report"
+            v-on:click="generateReport"/>
+          </div>
       <div
         class="q-gutter-md"
         style="width:700px; padding: 10px;">
@@ -18,14 +25,7 @@
             label="Search"
             v-on:click="search"/>
         </div>
-		    <div class="col-3">
-          <q-btn
-            color="primary"
-            icon="download"
-            label="Report"
-            v-on:click="generateReport"/>
-          </div>
-		    </div>
+	</div>
       </div>
     <VueHtml2pdf
         :show-layout="false"
@@ -45,7 +45,7 @@
         <q-timeline color="secondary">
           <q-timeline-entry
             heading
-            v-if="transactions !== null && transactions.length > 0 ">
+            v-if="transactions !== null && transactions.length > 0">
             Product Ledger
           </q-timeline-entry>
           <div>
@@ -55,13 +55,16 @@
               v-bind:key="transaction.TxId"
               :title="transaction.Value.organization"
               :subtitle="getTitle(i)">
-              <div>
+              <div >
                 TXID: {{transaction.TxId}}
               </div>
               <div>
                  Temperature: {{transaction.Value.maxTemp}}°C
-              </div>
+			  </div>
 
+			  <div v-if="transactions !== null && transaction.Value.maxTemp > 25">
+        		<p id="myP" style="color:red;">Recall the Batch</p>
+        	  </div>
             </q-timeline-entry>
           </div>
         </q-timeline>
@@ -140,7 +143,7 @@
         <q-timeline color="secondary">
           <q-timeline-entry
             heading
-            v-if="transactions !== null && transactions.length > 0 ">
+            v-if="transactions !== null && transactions.length > 0">
             Product Ledger
           </q-timeline-entry>
           <div>
@@ -153,7 +156,7 @@
               <div>
                 TXID: {{transaction.TxId}}
               </div>
-             <div>
+              <div>
                 Temperature: {{transaction.Value.maxTemp}}°C
               </div>
 			  <div
@@ -169,7 +172,7 @@
         </q-timeline>
       </div>
 	  <div
-        v-if="transactions !== null && transactions.length > 0 "
+        v-if="transactions !== null && transactions.length > 0"
         style="padding: 15px;">
         <div
           class="items-start q-gutter-md"

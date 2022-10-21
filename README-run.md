@@ -34,7 +34,8 @@ rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
 cd orgs/warehouse
 nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node createBatch.js && node server.js
+rm -rf _idwallet && node addToWallet.js 
+npm start
 
 on warehouse node
 node deliverBatch.js 46793579024
