@@ -41,7 +41,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n    \"drugname\": \"Crocin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"GSK Healthcare\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"2\",\r\n    \"maxTemp\": \"8\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n    \"drugname\": \"Crocin\",\r\n    \"amount\": \"100\",\r\n    \"organization\": \"GSK Healthcare\",\r\n    \"manufacture_date\": \"2022/10/01\",\r\n    \"expiry_date\": \"2022/10/31\",\r\n    \"minTemp\": \"2\",\r\n    \"maxTemp\": \"8\",\r\n    \"temp\": \"7\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/addbatch",
@@ -97,7 +97,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"ECHEMI\",\r\n     \"maxTemp\": \"7\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"ECHEMI\",\r\n     \"temp\": \"5\" \r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/transferBatch",
@@ -153,7 +153,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"Bio Pharma Logistics\",\r\n     \"maxTemp\": \"8\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"Bio Pharma Logistics\",\r\n     \"temp\": \"5\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/transferBatch",
@@ -209,7 +209,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"NetMeds\",\r\n     \"maxTemp\": \"9\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"NetMeds\",\r\n      \"temp\": \"7\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/transferBatch",
