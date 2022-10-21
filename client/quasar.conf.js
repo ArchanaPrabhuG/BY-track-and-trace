@@ -90,7 +90,7 @@ module.exports = function (ctx) {
 	   proxy: {
       // proxy all requests starting with /api to jsonplaceholder
       '/api': {
-        target: 'http://192.168.100.101:3000',
+        target: 'http://192.168.100.101:3001',
         changeOrigin: true
         
 	   }},

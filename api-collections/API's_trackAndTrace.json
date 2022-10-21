@@ -325,7 +325,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://192.168.100.101:8080/api/recallBatch?batchId=1",
+					"raw": "http://192.168.100.101:8080/api/recallBatch?batchId=1&drugName=Crocin",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -342,6 +342,10 @@
 						{
 							"key": "batchId",
 							"value": "1"
+						},
+						{
+							"key": "drugName",
+							"value": "Crocin"
 						}
 					]
 				}
