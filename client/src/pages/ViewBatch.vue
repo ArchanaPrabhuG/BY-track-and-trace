@@ -4,7 +4,7 @@
           <q-btn
             color="primary"
             icon="download"
-            label="Report"
+            label="Track Report"
             v-on:click="generateReport"/>
           </div>
       <div
@@ -43,26 +43,26 @@
         ref="html2Pdf">
 	 <section slot="pdf-content">
       <div class="q-px-lg q-pb-md">
-        <q-timeline color="secondary">
-          <q-timeline-entry
-            heading
-            v-if="transactions !== null && transactions.length > 0">
-            Product Ledger
-          </q-timeline-entry>
+        <q-timeline color="secondary" v-if="transactions !== null && transactions.length > 0">
+		    <div class='text-h4'>
+		      Transaction Ledger
+		     </div>
           <div>
             <q-timeline-entry
               v-for="(transaction, i) in transactions"
-			        v-if="i<5"
               v-bind:key="transaction.TxId"
-              :title="transaction.Value.organization"
-              :subtitle="getTitle(i)">
+              :title="getTitle(i)">
+			        <div v-if ="transaction.IsDelete === 'false' ">
+			        <div >
+                Organization : {{transaction.Value.organization}}
+              </div>
               <div >
                 TXID: {{transaction.TxId}}
               </div>
               <div>
-                 Temperature: {{transaction.Value.temp}}°C
+                 Current Temperature: {{transaction.Value.temp}}°C
 			  </div>
-
+			  </div>
 			  <div v-if="transactions !== null && transaction.Value.maxTemp<transaction.Value.temp">
         		<p id="myP" style="color:red;">Recall the Batch</p>
         	  </div>
@@ -96,7 +96,7 @@
                   clickable
                   v-ripple>
                   <q-item-section>
-                    <q-item-label overline>Amount</q-item-label>
+                    <q-item-label overline>Price</q-item-label>
                     <q-item-label>{{transactions[0].Value.amount}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -104,7 +104,7 @@
                   clickable
                   v-ripple>
                   <q-item-section>
-                    <q-item-label overline>Date Manufactured</q-item-label>
+                    <q-item-label overline>Manufactured Date</q-item-label>
                     <q-item-label>{{transactions[0].Value.dateManufactured}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -112,7 +112,7 @@
                   clickable
                   v-ripple>
                   <q-item-section>
-                    <q-item-label overline>Date Expired</q-item-label>
+                    <q-item-label overline>Expiry Date</q-item-label>
                     <q-item-label>{{transactions[0].Value.dateExpired}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -141,25 +141,27 @@
 	 </section>
     </VueHtml2pdf>
 	 <div class="q-px-lg q-pb-md">
-        <q-timeline color="secondary">
-          <q-timeline-entry
-            heading
-            v-if="transactions !== null && transactions.length > 0">
-            Product Ledger
-          </q-timeline-entry>
+   <q-timeline color="secondary" v-if="transactions !== null && transactions.length > 0">
+		<div class='text-h4'>
+		 Transaction Ledger
+		 </div>
           <div>
             <q-timeline-entry
               v-for="(transaction, i) in transactions"
-			        v-if="i<5"
+
               v-bind:key="transaction.TxId"
-              :title="transaction.Value.organization"
-              :subtitle="getTitle(i)">
+              :title="getTitle(i)">
+			    <div v-if ="transaction.IsDelete === 'false' ">
+			       <div>
+                Organization : {{transaction.Value.organization}}
+              </div>
               <div>
                 TXID: {{transaction.TxId}}
               </div>
               <div>
-                Temperature: {{transaction.Value.temp}}°C
+                Current Temperature: {{transaction.Value.temp}}°C
               </div>
+			  </div>
 			  <div
 				v-if="transactions !== null && transaction.Value.temp >transaction.Value.maxTemp">
 				<q-btn
@@ -198,7 +200,7 @@
                   clickable
                   v-ripple>
                   <q-item-section>
-                    <q-item-label overline>Amount</q-item-label>
+                    <q-item-label overline>Price</q-item-label>
                     <q-item-label>{{transactions[0].Value.amount}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -206,7 +208,7 @@
                   clickable
                   v-ripple>
                   <q-item-section>
-                    <q-item-label overline>Date Manufactured</q-item-label>
+                    <q-item-label overline>Manufactured Date</q-item-label>
                     <q-item-label>{{transactions[0].Value.dateManufactured}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -214,7 +216,7 @@
                   clickable
                   v-ripple>
                   <q-item-section>
-                    <q-item-label overline>Date Expired</q-item-label>
+                    <q-item-label overline>Expiry Date</q-item-label>
                     <q-item-label>{{transactions[0].Value.dateExpired}}</q-item-label>
                   </q-item-section>
                 </q-item>
@@ -251,19 +253,23 @@ export default {
         VueHtml2pdf
     },
   methods: {
+	  capitalized : function(name){
+	  const capitalized = name.charAt(0).toUpperCase()+ name.slice(1)
+	  console.log(capitalized)
+	  return capitalized
+  },
     getTitle: function (idx) {
-      if (this.isDelete === "true" ) {
-          return this.prefixes[4]
-      }else{
+	 if(this.transactions[idx].IsDelete === "false")
       return this.prefixes[idx]
-      }
+	  else
+	  return this.prefixes[4]
     },
 	recallBatch: function () {
-      this.$axios.delete(`/api/recallBatch?batchId=${this.batchID}&drugName=${this.drugName}`).then((resp) => {
+      this.$axios.delete(`/api/recallBatch?batchId=${this.batchID}`).then((resp) => {
         console.log(resp)
         this.$q.notify({
           message: 'Batch  recalled',
-          color: 'green'
+          color: 'red'
         })
       }).catch(err => {
         console.log(err)
@@ -299,7 +305,7 @@ export default {
    data () {
     return {
       batchID: '',
-      prefixes: ['Manufactured by', 'Supplied by', 'Stored at', 'Pharmacy','Recalled'],
+      prefixes: ['Manufactured by', 'Supplied by', 'Stored at', 'Pharmacy', 'Batch Recalled'],
       transactions: []
     }
   }

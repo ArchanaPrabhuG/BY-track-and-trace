@@ -37,7 +37,7 @@
 	    <q-input
         outlined
         v-model="temp"
-        label="Temperature"
+        label=" Current Temperature"
       />
 
       <div class="row">
