@@ -384,7 +384,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"maxTemp\": \"27\",\r\n     \"isUpdate\": \"true\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"temp\": \"27\",\r\n     \"isUpdate\": \"true\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/updateBatch",
