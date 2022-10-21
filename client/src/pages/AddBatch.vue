@@ -34,6 +34,11 @@
         v-model="maxTemp"
         label="Max Temperature"
       />
+	    <q-input
+        outlined
+        v-model="temp"
+        label="Temperature"
+      />
 
       <div class="row">
         <div class="col">
@@ -80,6 +85,7 @@ export default {
       this.expiry_date = ''
 	  this.minTemp = ''
 	  this.maxTemp= ''
+	  this.temp= ''
     },
     addBatch: function () {
       this.$axios.post(`/api/addbatch`, {
@@ -90,7 +96,8 @@ export default {
         manufacture_date: this.manufacture_date,
         expiry_date: this.expiry_date,
 		minTemp: this.minTemp,
-		maxTemp: this.maxTemp
+		maxTemp: this.maxTemp,
+		temp: this.temp
       }).then((resp) => {
         console.log(resp)
         this.$q.notify({
@@ -115,7 +122,8 @@ export default {
       manufacture_date: '',
       expiry_date: '',
 	  minTemp: '',
-	  maxTemp: ''
+	  maxTemp: '',
+	  temp: ''
     }
   }
 }

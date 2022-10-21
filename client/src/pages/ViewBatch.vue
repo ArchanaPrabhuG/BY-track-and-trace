@@ -59,10 +59,10 @@
                 TXID: {{transaction.TxId}}
               </div>
               <div>
-                 Temperature: {{transaction.Value.maxTemp}}°C
+                 Temperature: {{transaction.Value.temp}}°C
 			  </div>
 
-			  <div v-if="transactions !== null && transaction.Value.maxTemp > 25">
+			  <div v-if="transactions !== null && transaction.Value.temp > transaction.Value.maxTemp">
         		<p id="myP" style="color:red;">Recall the Batch</p>
         	  </div>
             </q-timeline-entry>
@@ -157,10 +157,10 @@
                 TXID: {{transaction.TxId}}
               </div>
               <div>
-                Temperature: {{transaction.Value.maxTemp}}°C
+                Temperature: {{transaction.Value.temp}}°C
               </div>
 			  <div
-				v-if="transactions !== null && transaction.Value.maxTemp > 25">
+				v-if="transactions !== null && transaction.Value.temp > transaction.Value.maxTemp">
 				<q-btn
 					color="red"
 					label="Recall"
