@@ -63,7 +63,7 @@
                  Temperature: {{transaction.Value.temp}}°C
 			  </div>
 
-			  <div v-if="transactions !== null && transaction.Value.temp >transaction.Value.maxTemp">
+			  <div v-if="transactions !== null && transaction.Value.maxTemp<transaction.Value.temp">
         		<p id="myP" style="color:red;">Recall the Batch</p>
         	  </div>
             </q-timeline-entry>
@@ -252,13 +252,17 @@ export default {
     },
   methods: {
     getTitle: function (idx) {
+      if (this.isDelete === "true" ) {
+          return this.prefixes[4]
+      }else{
       return this.prefixes[idx]
+      }
     },
 	recallBatch: function () {
-      this.$axios.delete(`/api/recallBatch?batchId=${this.batchID}`).then((resp) => {
+      this.$axios.delete(`/api/recallBatch?batchId=${this.batchID}&drugName=${this.drugName}`).then((resp) => {
         console.log(resp)
         this.$q.notify({
-          message: 'Batch recalled',
+          message: 'Batch  recalled',
           color: 'green'
         })
       }).catch(err => {
@@ -275,14 +279,14 @@ export default {
         this.transactions = JSON.parse(resp.data)
         if (this.transactions.length === 0) {
           this.$q.notify({
-            message: `Failed to find ${this.batchID}`,
+            message: 'Failed to find batch',
             color: 'red'
           })
         }
       }).catch((err) => {
         console.log(err.response)
         this.$q.notify({
-          message: `Failed to find ${this.batchID}`,
+          message: 'Failed to find batch',
           color: 'red'
         })
         this.transactions = []

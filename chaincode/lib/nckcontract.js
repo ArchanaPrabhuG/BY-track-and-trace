@@ -369,14 +369,14 @@ async removeBatch(ctx, RFIDtag) {
     }
     let batchJSON = {};
     try {
-      batchJSON = JSON.parse(RFIDtag.toString());
+      batchJSON = JSON.parse(RFIDBatchAsbytes.toString());
     } catch (err) {
       jsonResp = {};
       jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
       throw new Error(jsonResp);
     }
 
-
+	// delete the state
     await ctx.stub.deleteState(RFIDtag); //remove the marble from chaincode state
 	console.log('delete state done..');
 
@@ -391,7 +391,7 @@ async removeBatch(ctx, RFIDtag) {
 	console.log('deleted nameTagIndexKey..');
 	console.log('RFIDtag  deleted from the ledger Successfully..');
 	console.info('============= END : removeBatch ===========');
-}
+  }
 
 }
 

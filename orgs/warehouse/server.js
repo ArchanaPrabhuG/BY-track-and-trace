@@ -108,7 +108,7 @@ app.get('/api/find', async (req, res) => {
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
         const result = await contract.evaluateTransaction('getHistoryForBatch', id);
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        console.log(`Transaction has been evaluated, result is: ${ JSON.stringify(JSON.parse(result))}`);
         res.status(200).json(result.toString());
     } catch (error) {
 
@@ -126,7 +126,7 @@ app.get('/api/find', async (req, res) => {
 app.delete('/api/recallBatch', async (req, res) => {
     // A gateway defines the peers used to access Fabric networks
     const gateway = new Gateway();
-const id = req.query.batchId;
+	const id = req.query.batchId;
     // Main try/catch block
     try {
 
@@ -149,7 +149,7 @@ const id = req.query.batchId;
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
 		console.log('delete batch');
-        const buyResponse = await contract.evaluateTransaction('removeBatch', id);
+        const buyResponse = await contract.submitTransaction('removeBatch', id);
          res.status(204).json({ success: true });
     } catch (error) {
 
