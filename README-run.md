@@ -4,6 +4,12 @@ ON EVERY LOGIN AFTER SETUP IS COMPLETE ONLY RUN BELOW COMMANDS
 vagrant up
 ./byfndown.sh
 
+cd BY-track-and-trace 
+git pull
+cd ..
+chmod -R 777 BY-track-and-trace
+cd BY-track-and-trace
+
 chaincode ::
 cd chaincode
 npm install

@@ -284,83 +284,6 @@ class NCKContract extends Contract {
 
     }
 
-  // ==================================================
-  // delete - remove a batch key/value pair from state
-  // ==================================================
-  async delete(ctx, RFIDtag) {
-
-    if (!RFIDtag) {
-      throw new Error('RFID batch tag must not be empty');
-    }
-    // to maintain the color~name index, we need to read the marble first and get its color
-    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the marble from chaincode state
-    let jsonResp = {};
-    if (!RFIDBatchAsbytes) {
-      jsonResp.error = 'batch does not exist: ' + RFIDtag;
-      throw new Error(jsonResp);
-    }
-    let batchJSON = {};
-    try {
-      batchJSON = JSON.parse(RFIDtag.toString());
-    } catch (err) {
-      jsonResp = {};
-      jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
-      throw new Error(jsonResp);
-    }
-
-
-    await stub.deleteState(RFIDtag); //remove the marble from chaincode state
-
-    // delete the index
-    let indexName = 'drugName ~ RFIDtag';
-    let nameTagIndexKey = ctx.stub.createCompositeKey(indexName, [batchJSON.drugName, batchJSON.RFIDtag]);
-    if (!nameTagIndexKey) {
-      throw new Error(' Failed to create the createCompositeKey');
-    }
-    //  Delete index entry to state.
-    await ctx.stub.deleteState(nameTagIndexKey);
-	console.log('RFIDtag  deleted from the ledger Successfully..');
-
-  }
-
-
-  async deleteBatch(ctx,RFIDtag) {
-
-     if (!RFIDtag) {
-      throw new Error('RFID batch tag must not be empty');
-    }
-    // to maintain the color~name index, we need to read the marble first and get its color
-    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the marble from chaincode state
-    let jsonResp = {};
-    if (!RFIDBatchAsbytes) {
-      jsonResp.error = 'batch does not exist: ' + RFIDtag;
-      throw new Error(jsonResp);
-    }
-    let batchJSON = {};
-    try {
-      batchJSON = JSON.parse(RFIDtag.toString());
-    } catch (err) {
-      jsonResp = {};
-      jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
-      throw new Error(jsonResp);
-    }
-
-
-    await stub.deleteState(RFIDtag); //remove the marble from chaincode state
-	console.log('delete state done..');
-
-    // delete the index
-    let indexName = 'drugName ~ RFIDtag';
-    let nameTagIndexKey = ctx.stub.createCompositeKey(indexName, [batchJSON.drugName, batchJSON.RFIDtag]);
-    if (!nameTagIndexKey) {
-      throw new Error(' Failed to create the createCompositeKey');
-    }
-    //  Delete index entry to state.
-    await ctx.stub.deleteState(nameTagIndexKey);
-	console.log('deleted nameTagIndexKey..');
-	console.log('RFIDtag  deleted from the ledger Successfully..');
-
-    }
 
   async queryAllBatches(ctx, startKey, endKey) {
 
@@ -431,6 +354,44 @@ class NCKContract extends Contract {
     console.info('- end transferBatchBasedOnName: ' + responsePayload);
   }
 
+async removeBatch(ctx, RFIDtag) {
+    console.info('============= START : removeBatch ===========');
+
+    if (!RFIDtag) {
+      throw new Error('RFID batch tag must not be empty');
+    }
+    // to maintain the color~name index, we need to read the marble first and get its color
+    let RFIDBatchAsbytes = await ctx.stub.getState(RFIDtag); //get the marble from chaincode state
+    let jsonResp = {};
+    if (!RFIDBatchAsbytes) {
+      jsonResp.error = 'batch does not exist: ' + RFIDtag;
+      throw new Error(jsonResp);
+    }
+    let batchJSON = {};
+    try {
+      batchJSON = JSON.parse(RFIDtag.toString());
+    } catch (err) {
+      jsonResp = {};
+      jsonResp.error = 'Failed to decode JSON of: ' + RFIDtag;
+      throw new Error(jsonResp);
+    }
+
+
+    await ctx.stub.deleteState(RFIDtag); //remove the marble from chaincode state
+	console.log('delete state done..');
+
+    // delete the index
+    let indexName = 'drugName ~ RFIDtag';
+    let nameTagIndexKey = ctx.stub.createCompositeKey(indexName, [batchJSON.drugName, batchJSON.RFIDtag]);
+    if (!nameTagIndexKey) {
+      throw new Error(' Failed to create the createCompositeKey');
+    }
+    //  Delete index entry to state.
+    await ctx.stub.deleteState(nameTagIndexKey);
+	console.log('deleted nameTagIndexKey..');
+	console.log('RFIDtag  deleted from the ledger Successfully..');
+	console.info('============= END : removeBatch ===========');
+}
 
 }
 

@@ -37,7 +37,8 @@
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
-        pdf-orientation="landscape"
+		   :pdf-margin="10"
+        pdf-orientation="portrait"
         pdf-content-width="800px"
         ref="html2Pdf">
 	 <section slot="pdf-content">
@@ -62,7 +63,7 @@
                  Temperature: {{transaction.Value.temp}}°C
 			  </div>
 
-			  <div v-if="transactions !== null && transaction.Value.temp > transaction.Value.maxTemp">
+			  <div v-if="transactions !== null && transaction.Value.temp >transaction.Value.maxTemp">
         		<p id="myP" style="color:red;">Recall the Batch</p>
         	  </div>
             </q-timeline-entry>
@@ -160,7 +161,7 @@
                 Temperature: {{transaction.Value.temp}}°C
               </div>
 			  <div
-				v-if="transactions !== null && transaction.Value.temp > transaction.Value.maxTemp">
+				v-if="transactions !== null && transaction.Value.temp >transaction.Value.maxTemp">
 				<q-btn
 					color="red"
 					label="Recall"
@@ -253,26 +254,8 @@ export default {
     getTitle: function (idx) {
       return this.prefixes[idx]
     },
-	transportBatch: function () {
-      this.$axios.post(`/api/transportBatch`, {
-        rfid: this.rfid,
-        organization: this.organization
-      }).then((resp) => {
-        console.log(resp)
-        this.$q.notify({
-          message: 'Batch recalled',
-          color: 'green'
-        })
-      }).catch(err => {
-        console.log(err)
-        this.$q.notify({
-          message: 'Failed to recall batch',
-          color: 'red'
-        })
-      })
-    },
 	recallBatch: function () {
-      this.$axios.delete(`/api/deleteBatch?batchId=${this.batchID}`).then((resp) => {
+      this.$axios.delete(`/api/recallBatch?batchId=${this.batchID}`).then((resp) => {
         console.log(resp)
         this.$q.notify({
           message: 'Batch recalled',

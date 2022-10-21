@@ -153,7 +153,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"Bio Pharma Logistics\",\r\n     \"temp\": \"5\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"Bio Pharma Logistics\",\r\n     \"temp\": \"9\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/transferBatch",
@@ -209,7 +209,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"NetMeds\",\r\n      \"temp\": \"7\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"organization\": \"NetMeds\",\r\n      \"temp\": \"6\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/transferBatch",
@@ -297,7 +297,7 @@
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [
 					{
 						"key": "Accept",
@@ -325,7 +325,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://192.168.100.101:8080/api/deleteBatch?batchId=1",
+					"raw": "http://192.168.100.101:8080/api/recallBatch?batchId=1",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -336,7 +336,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"deleteBatch"
+						"recallBatch"
 					],
 					"query": [
 						{
@@ -384,7 +384,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"temp\": \"27\",\r\n     \"isUpdate\": \"true\"\r\n}"
+					"raw": "{\r\n    \"rfid\": \"1\",\r\n     \"temp\": \"7\",\r\n     \"isUpdate\": \"true\"\r\n}"
 				},
 				"url": {
 					"raw": "http://192.168.100.101:8080/api/updateBatch",

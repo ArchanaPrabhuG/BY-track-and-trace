@@ -123,7 +123,7 @@ app.get('/api/find', async (req, res) => {
     }
 });
 
-app.delete('/api/deleteBatch', async (req, res) => {
+app.delete('/api/recallBatch', async (req, res) => {
     // A gateway defines the peers used to access Fabric networks
     const gateway = new Gateway();
 const id = req.query.batchId;
@@ -149,7 +149,7 @@ const id = req.query.batchId;
         const network = await gateway.getNetwork('bychannel');
         const contract = await network.getContract('nckcc');
 		console.log('delete batch');
-        const buyResponse = await contract.submitTransaction('deleteBatch', id);
+        const buyResponse = await contract.evaluateTransaction('removeBatch', id);
          res.status(204).json({ success: true });
     } catch (error) {
 

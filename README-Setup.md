@@ -92,7 +92,8 @@ npm start
 cd orgs/warehouse
 nvm use 10
 npm install
-rm -rf _idwallet && node addToWallet.js && node createBatch.js
+rm -rf _idwallet && node addToWallet.js
+npm start
 
 on warehouse node
 
