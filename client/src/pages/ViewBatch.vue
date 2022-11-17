@@ -15,14 +15,14 @@
           <q-input
             outlined
             v-model="batchID"
-            label="BatchID"/>
+            label="Batch ID"/>
         </div>
 		&nbsp&nbsp&nbsp
         <div class="col-3">
           <q-btn
             color="primary"
             icon="search"
-            label="Search"
+            label="Trace Batch"
             v-on:click="search"/>
         </div>
 	</div>
@@ -141,18 +141,19 @@
 	 </section>
     </VueHtml2pdf>
 	 <div class="q-px-lg q-pb-md">
-   <q-timeline color="secondary" v-if="transactions !== null && transactions.length > 0">
+        <q-timeline color="secondary" v-if="transactions !== null && transactions.length > 0">
 		<div class='text-h4'>
 		 Transaction Ledger
 		 </div>
+
           <div>
             <q-timeline-entry
               v-for="(transaction, i) in transactions"
 
               v-bind:key="transaction.TxId"
               :title="getTitle(i)">
-			    <div v-if ="transaction.IsDelete === 'false' ">
-			       <div>
+			<div v-if ="transaction.IsDelete === 'false' ">
+			   <div>
                 Organization : {{transaction.Value.organization}}
               </div>
               <div>

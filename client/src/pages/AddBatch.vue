@@ -7,7 +7,7 @@
       <q-input
         outlined
         v-model="rfid"
-        label="RFID"
+        label="Batch ID"
       />
       <q-input
         outlined
