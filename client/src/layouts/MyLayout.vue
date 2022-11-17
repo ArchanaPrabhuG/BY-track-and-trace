@@ -15,7 +15,7 @@
 
         <q-toolbar-title>
           <q-avatar>
-          </q-avatar> BY-Track-and-Trace
+          </q-avatar> BY-Track-And-Trace
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
